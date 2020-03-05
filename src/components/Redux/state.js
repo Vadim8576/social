@@ -1,3 +1,5 @@
+import { findAllInRenderedTree } from "react-dom/test-utils";
+
 const state = {
     dialogsPage: {
         users: [
@@ -22,7 +24,7 @@ const state = {
 
 
 export let addPost = (postMessage) => {
-
+ 
     let newPost = {
         id: 5,
         message: postMessage,
@@ -30,6 +32,7 @@ export let addPost = (postMessage) => {
     };
 
     state.postsPage.posts.push(newPost);
+    RenderedTree();
 }
 
 

@@ -9,10 +9,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 // addPost('new post');
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App state={state} addPost={addPost} />
-    </BrowserRouter>, document.getElementById('root'));
+
+let RenderedTree = () => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App state={state} addPost={addPost} />
+        </BrowserRouter>, document.getElementById('root'));
+}
+
+RenderedTree();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
