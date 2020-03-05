@@ -5,13 +5,14 @@ import css from './posts.module.css';
 
 
 
-const AddPost = (props) => {
+const MyPosts = (props) => {
     //newPostElement - ссылается на textarea
     let newPostElement = React.createRef(); //Аналог селектора
 
     let addPost = () => {
         let text = newPostElement.current.value;
-        alert(text);
+        // console.log(props.addPost);
+        props.addPost(text);
     }
 
     return (    
@@ -35,7 +36,7 @@ const Page = (props) => {
 
     return (
         <div>
-            <AddPost />
+            <MyPosts addPost={props.addPost} />
             <div>
                {post}
              {/* <Post message={postData[0].message}/> */}
