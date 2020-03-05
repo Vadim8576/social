@@ -5,9 +5,9 @@ import css from './posts.module.css';
 
 
 
-const AddPost = () => {
-
-    let newPostElement = React.createRef();
+const AddPost = (props) => {
+    //newPostElement - ссылается на textarea
+    let newPostElement = React.createRef(); //Аналог селектора
 
     let addPost = () => {
         let text = newPostElement.current.value;

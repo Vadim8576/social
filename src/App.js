@@ -25,7 +25,9 @@ const App = (props) => {
             messages={props.state.dialogsPage.messages} />} />
 
         <Route path='/posts' render={() =>
-          <Posts posts={props.state.postsPage.posts} />} />
+          <Posts
+            posts={props.state.postsPage.posts}
+            addPost={props.addPost} />} />
 
         <Route path='/news' component={News} />
         <Route path='/foto' component={Fotos} />          
