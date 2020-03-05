@@ -1,0 +1,9 @@
+.item{
+  border-bottom: 1px mediumturquoise solid;
+  padding-left: 20px;
+  
+}
+
+.item img{
+  width: 30px;
+}

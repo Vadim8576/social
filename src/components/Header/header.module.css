@@ -1,0 +1,25 @@
+.logo{
+  height: 60px;
+  border-radius: 50%;
+}
+  
+  .header{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    grid-area: h;
+    background-color: green;
+  }
+
+  .headerLogo{
+    float: left;
+    height: 60px;
+   
+  }
+
+  .title{
+    display: inline;
+    color: white;
+    font-size: 20px;
+    padding-left: 30px;
+  }

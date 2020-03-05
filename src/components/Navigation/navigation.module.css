@@ -1,0 +1,10 @@
+.nav{
+    grid-area: n;
+    /* background-color: black; */
+    border-right: 1px gray solid;
+  }
+
+.nav ul {
+  margin: 30px 0;
+}
+  
