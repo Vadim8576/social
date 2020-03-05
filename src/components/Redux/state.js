@@ -1,4 +1,4 @@
-import { findAllInRenderedTree } from "react-dom/test-utils";
+import { rerenderEntireTree } from '../../render';
 
 const state = {
     dialogsPage: {
@@ -32,7 +32,7 @@ export let addPost = (postMessage) => {
     };
 
     state.postsPage.posts.push(newPost);
-    RenderedTree();
+    rerenderEntireTree(state);
 }
 
 
