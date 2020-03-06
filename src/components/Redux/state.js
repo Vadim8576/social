@@ -18,21 +18,34 @@ const state = {
         {id: 1, message: 'Hello!', likesCount: 10},
         {id: 2, message: 'Это переданный...', likesCount: 0},
         {id: 3, message: '...параметр Props,', likesCount: 5},
-        {id: 4, message: 'а это значение переменной...', likesCount: 24}]
+        {id: 4, message: 'а это значение переменной...', likesCount: 24}],
+        newPostText: ''
     }
 };
 
 
-export let addPost = (postMessage) => {
+export let addPost = () => {
  
+    if(!state.postsPage.newPostText) return;
+    
+    
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.postsPage.newPostText,
         likesCount: 0
     };
 
     state.postsPage.posts.push(newPost);
+    state.postsPage.newPostText = '';
     rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText) => {
+ 
+    
+    state.postsPage.newPostText = newText;
+    rerenderEntireTree(state);
+    
 }
 
 

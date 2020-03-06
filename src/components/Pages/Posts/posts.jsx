@@ -10,33 +10,47 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef(); //Аналог селектора
 
     let addPost = () => {
+       
+        props.addPost();
+       
+        
+    }
+
+    let onTextareaChange = () => {
+  
         let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement.current.value = '';
+        
+        props.updateNewPostText(text);
     }
 
     return (    
-            <div className={css.addPost}>
-                <h2>Мои посты</h2>
-                <div>
-                    <textarea ref={ newPostElement }></textarea>
-                </div>
-                <div>
-                    <button onClick={ addPost }>Добавить пост</button>
-                </div>
+        <div className={css.addPost}>
+            <h2>Мои посты</h2>
+            <div>
+                <textarea
+                    ref={ newPostElement }
+                    onChange={onTextareaChange}
+                    value={props.newPostText} />
             </div>
+            <div>
+                <button onClick={ addPost }>Добавить пост</button>
+            </div>
+        </div>
     );
 };
 
 
 
-const Page = (props) => {
-
+const Posts = (props) => {
+    // debugger;
     let post = props.posts.map((el) => <Post message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
         <div>
-            <MyPosts addPost={props.addPost} />
+            <MyPosts
+                addPost={props.addPost}
+                newPostText={props.newPostText}
+                updateNewPostText={props.updateNewPostText} />
             <div>
                {post}
              {/* <Post message={postData[0].message}/> */}
@@ -45,4 +59,4 @@ const Page = (props) => {
     );
 }
 
-export default Page;
+export default Posts;
