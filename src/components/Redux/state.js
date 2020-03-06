@@ -1,4 +1,7 @@
-import { rerenderEntireTree } from '../../render';
+let rerenderEntireTree = () => {
+    console.log('state change');
+}
+
 
 const state = {
     dialogsPage: {
@@ -24,7 +27,7 @@ const state = {
 };
 
 
-export let addPost = () => {
+export const addPost = () => {
  
     if(!state.postsPage.newPostText) return;
     
@@ -40,7 +43,7 @@ export let addPost = () => {
     rerenderEntireTree(state);
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
  
     
     state.postsPage.newPostText = newText;
@@ -48,5 +51,8 @@ export let updateNewPostText = (newText) => {
     
 }
 
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer; // observer (наблюдатель) - это pattern
+}
 
 export default state;
