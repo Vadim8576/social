@@ -1,9 +1,7 @@
 import React from 'react';
 import Post from './Post/post';
 import css from './posts.module.css';
-
-
-
+import {addPostActionCreator, updateNewPostNextActionCreator} from '../../Redux/state';
 
 const MyPosts = (props) => {
     // debugger;
@@ -12,13 +10,13 @@ const MyPosts = (props) => {
 
     let addPost = () => {   
         // debugger;
-        props.dispatch({type: 'ADD-POST'}); 
+        props.dispatch( addPostActionCreator() ); 
     }
 
     let onTextareaChange = () => {
         // debugger;
         let text = newPostElement.current.value;
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+        props.dispatch( updateNewPostNextActionCreator(text) );
     }
 
     return (    
@@ -44,14 +42,12 @@ const Posts = (props) => {
     let post = props.posts.map((el) => <Post message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
-        <div>
-           
+        <div>   
             <MyPosts
-                newPostText={props.newPostText}
-                dispatch={props.dispatch} />
+                newPostText={ props.newPostText }
+                dispatch={ props.dispatch } />
             <div>
                {post}
-             {/* <Post message={postData[0].message}/> */}
             </div>
         </div>
     );
