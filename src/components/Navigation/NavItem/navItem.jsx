@@ -8,6 +8,7 @@ const NavItem = (props) => {
     return (  
         
         <li className={css.item}>
+            {/* NavLink - меняет URL без перезагрузки страницы */}
             <NavLink to={props.link} activeClassName={css.active}>{props.item}</NavLink>
         </li> 
     );
