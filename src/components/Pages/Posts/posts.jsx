@@ -6,21 +6,19 @@ import css from './posts.module.css';
 
 
 const MyPosts = (props) => {
+    // debugger;
     //newPostElement - ссылается на textarea
     let newPostElement = React.createRef(); //Аналог селектора
 
-    let addPost = () => {
-       
-        props.addPost();
-       
-        
+    let addPost = () => {   
+        // debugger;
+        props.dispatch({type: 'ADD-POST'}); 
     }
 
     let onTextareaChange = () => {
-  
+        // debugger;
         let text = newPostElement.current.value;
-        
-        props.updateNewPostText(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
     }
 
     return (    
@@ -29,8 +27,8 @@ const MyPosts = (props) => {
             <div>
                 <textarea
                     ref={ newPostElement }
-                    onChange={onTextareaChange}
-                    value={props.newPostText} />
+                    onChange={ onTextareaChange }
+                    value={ props.newPostText } />
             </div>
             <div>
                 <button onClick={ addPost }>Добавить пост</button>
@@ -42,15 +40,15 @@ const MyPosts = (props) => {
 
 
 const Posts = (props) => {
-    // debugger;
+   
     let post = props.posts.map((el) => <Post message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
         <div>
+           
             <MyPosts
-                addPost={props.addPost}
                 newPostText={props.newPostText}
-                updateNewPostText={props.updateNewPostText} />
+                dispatch={props.dispatch} />
             <div>
                {post}
              {/* <Post message={postData[0].message}/> */}

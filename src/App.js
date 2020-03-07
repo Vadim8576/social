@@ -13,7 +13,7 @@ import { Route } from 'react-router-dom';
 
 const App = (props) => {
   // console.log(props);
-  
+    
   return (    
     <div className="App">
         <Header />
@@ -29,8 +29,7 @@ const App = (props) => {
           <Posts
             newPostText={props.state.postsPage.newPostText}
             posts={props.state.postsPage.posts}
-            addPost={props.addPost}
-            updateNewPostText={props.updateNewPostText} />} />
+            dispatch={props.dispatch} />} />
 
         <Route path='/news' component={News} />
         <Route path='/foto' component={Fotos} />          

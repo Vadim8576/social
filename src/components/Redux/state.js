@@ -22,38 +22,35 @@ let store = {
         }
     },
 
-    getState() {
-        return this._state;
-    },
-
     _callSubscriber() {
         console.log('state change');
     },
-    
-    addPost() {
- 
-        if(!this._state.postsPage.newPostText) return;
-        
-        
-        let newPost = {
-            id: 5,
-            message: this._state.postsPage.newPostText,
-            likesCount: 0
-        };
-    
-        this._state.postsPage.posts.push(newPost);
-        this._state.postsPage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
 
-    updateNewPostText(newText) {  
-        this._state.postsPage.newPostText = newText;
-        this._callSubscriber(this._state);
-        
+    getState() {
+        return this._state;
     },
-
+  
     subscribe(observer) {
         this._callSubscriber = observer; // observer (наблюдатель) - это pattern
+    }, 
+
+    dispatch(action) { //action это объект 
+        if(action.type === 'ADD-POST') {
+            if(!this._state.postsPage.newPostText) return;
+
+            let newPost = {
+                id: 5,
+                message: this._state.postsPage.newPostText,
+                likesCount: 0
+            };
+        
+            this._state.postsPage.posts.push(newPost);
+            this._state.postsPage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if(action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.postsPage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 }
 
