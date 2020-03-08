@@ -8,18 +8,15 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../..
  
 const Messages = (props) => {
 
-    //  console.log(props.messages);
+    let messages = props.store.getState().dialogsPage.messages.map(el => <Message messages={el.messages} />);
+    // debugger;
 
-    let messages = props.messages.map(el => <Message messages={el.messages} />);
-
-
-    let newMessageBody = props.state.newMessageBody;
+    let newMessageBody = props.store.getState().dialogsPage.newMessageBody;
     let onSendMessageClick = () => props.store.dispatch( sendMessageActionCreator());
-
 
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.dispatch( updateNewMessageBodyActionCreator(body) );
+        props.store.dispatch( updateNewMessageBodyActionCreator(body) );
     }
 
     return (

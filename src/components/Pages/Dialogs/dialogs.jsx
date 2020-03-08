@@ -6,10 +6,12 @@ import Messages from './Messages/messages';
 
 const Dialogs = (props) => {
     // console.log(props.message);
+    // debugger;
+    let state = props.store.getState();
     return (
         <div className={css.dialogs__messages}>
-            <Items users={props.users} />
-            <Messages messages={props.messages} />
+            <Items users={state.dialogsPage.users} />
+            <Messages store={props.store} />
         </div>
     );
 }
