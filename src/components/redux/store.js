@@ -14,7 +14,7 @@ let store = {
                 {id: 2, messages: 'Как дела?'},
                 {id: 3, messages: 'Yo!'},
                 {id: 4, messages: 'Пока!'}],
-            newMessageBody: '',
+            newMessageBody: ''
         },
         postsPage: {
             posts: [
