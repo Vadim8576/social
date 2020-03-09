@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from './Post/post';
 import css from './posts.module.css';
-import {addPostActionCreator, updateNewPostNextActionCreator} from '../../Redux/state';
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../Redux/postsReducer';
 
 const MyPosts = (props) => {
     // debugger;
@@ -14,9 +14,9 @@ const MyPosts = (props) => {
     }
 
     let onTextareaChange = () => {
-        // debugger;
+    //    debugger;
         let text = newPostElement.current.value;
-        props.dispatch( updateNewPostNextActionCreator(text) );
+        props.dispatch( updateNewPostTextActionCreator(text) );
     }
 
     return (    
@@ -26,7 +26,7 @@ const MyPosts = (props) => {
                 <textarea
                     ref={ newPostElement }
                     onChange={ onTextareaChange }
-                    value={ props.newPostText } />
+                    value={ props.store.getState().postsPage.newPostText } />
             </div>
             <div>
                 <button onClick={ addPost }>Добавить пост</button>
@@ -38,14 +38,16 @@ const MyPosts = (props) => {
 
 
 const Posts = (props) => {
-   
-    let post = props.posts.map((el) => <Post message={el.message} likesCount={el.likesCount.toString()} />);
+//    debugger;
+    let post = props.store.getState().postsPage.posts
+        .map((el) =>
+        <Post message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
         <div>   
             <MyPosts
-                newPostText={ props.newPostText }
-                dispatch={ props.dispatch } />
+                store={ props.store }
+                dispatch={ props.store.dispatch.bind(props.store) } />
             <div>
                {post}
             </div>

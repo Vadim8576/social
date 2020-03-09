@@ -2,7 +2,7 @@ import React from 'react';
 import Message from './Message/message'
 import css from './messages.module.css';
 
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../../../Redux/state';
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../../../Redux/dialogsReducer';
 
 
  

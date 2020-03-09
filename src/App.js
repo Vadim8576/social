@@ -27,9 +27,8 @@ const App = (props) => {
 
         <Route path='/posts' render={() =>
           <Posts
-            newPostText={props.store.getState().postsPage.newPostText}
-            posts={props.store.getState().postsPage.posts}
-            dispatch={props.store.dispatch} />} />
+            store={props.store}
+            dispatch={props.store.dispatch.bind(props.store)} />} />
 
         <Route path='/news' component={News} />
         <Route path='/foto' component={Fotos} />          
