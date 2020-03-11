@@ -18,7 +18,8 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../..
 //////////////////////////////// react-redux
 let mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        newMessageBody: state.dialogsPage.newMessageBody
     }
 }
 

@@ -10,7 +10,8 @@ const Posts = (props) => {
         <Post message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
-        <div>   
+        <div> 
+            {/* <MyPosts> */}
             <div className={css.addPost}>
                 <h2>Мои посты</h2>
                 <div>
@@ -22,6 +23,7 @@ const Posts = (props) => {
                     <button onClick={ props.addPost }>Добавить пост</button>
                 </div>
             </div>
+            {/* </MyPosts> */}
             <div>
                {post}
             </div>

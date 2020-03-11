@@ -7,7 +7,8 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from '../../redux/
 //////////////////////////////// react-redux
 let mapStateToProps = (state) => {
     return {
-        postsPage: state.postsPage
+        postsPage: state.postsPage,
+        newPostText: state.postsPage.newPostText
     }
 }
 
@@ -22,5 +23,6 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
+/////////////////////////////////////
 
 export default PostsContainer;
