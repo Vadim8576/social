@@ -6,7 +6,7 @@ import css from './items.module.css';
 
 const Items = (props) => {
 
-    let item = props.users.map (el => <Item id={el.id} name={el.name} />);
+    let item = props.users.map (el => <Item key={el.id} id={el.id} name={el.name} />);
 
  return (
         <div className={css.dialogs__items}>

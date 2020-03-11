@@ -6,7 +6,8 @@ import css from './messages.module.css';
  
 const Messages = (props) => {
     // debugger;
-    let messages = props.dialogsPage.messages.map(el => <Message messages={el.messages} />);
+    let messages = props.dialogsPage.messages
+    .map(el => <Message key={el.id} messages={el.messages} />);
     
     // let newMessageBody = props.dialogsPage.newMessageBody;
     

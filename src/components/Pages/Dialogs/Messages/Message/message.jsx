@@ -5,7 +5,7 @@ import css from './message.module.css';
 const Message = (props) => {
     // console.log(props.messages);
     return (
-        <div className={css.dialogs__messages_message+' '+css.active}>
+        <div className={css.dialogs__messages_message}>
             {props.messages}
          </div>
     );

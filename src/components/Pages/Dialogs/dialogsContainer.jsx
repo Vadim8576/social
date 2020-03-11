@@ -23,5 +23,8 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+// connect имеет свой метод subscribe,
+// который следит,
+// когда измениться state (dialogsPage) из mapStateToProps
 /////////////////////////////////////////////////
 export default DialogsContainer;

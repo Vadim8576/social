@@ -7,7 +7,7 @@ const Posts = (props) => {
 //    debugger;
     let post = props.postsPage.posts
         .map((el) =>
-        <Post message={el.message} likesCount={el.likesCount.toString()} />);
+        <Post key={el.id} message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
         <div> 
