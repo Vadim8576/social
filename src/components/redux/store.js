@@ -1,6 +1,6 @@
 import postsReducer from "./postsReducer";
 import dialogsReducer from "./dialogsReducer";
-
+ 
 let store = {
     _state: {
         dialogsPage: {
