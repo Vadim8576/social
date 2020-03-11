@@ -7,11 +7,16 @@ import Messages from './Messages/messages';
 const Dialogs = (props) => {
     // console.log(props.message);
     // debugger;
-    let state = props.store.getState();
+    // let state = props.store.getState();
+    // debugger;
     return (
         <div className={css.dialogs__messages}>
-            <Items users={state.dialogsPage.users} />
-            <Messages store={props.store} />
+            <Items users={props.dialogsPage.users} />
+            <Messages
+                onNewMessageChange={props.onNewMessageChange}
+                onSendMessageClick={props.onSendMessageClick}
+                dialogsPage={props.dialogsPage}
+            />
         </div>
     );
 }

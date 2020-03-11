@@ -12,7 +12,7 @@ let initialState = {
 
 
 const postsReducer = (state = initialState, action) => {
-    console.log(state);
+    // console.log(state);
     switch(action.type) {
         case ADD_POST:
             // if(!state.newPostText) return state;
@@ -24,7 +24,7 @@ const postsReducer = (state = initialState, action) => {
             
             state.newPostText = '';
             state.posts.push(newPost);
-            console.log(state);
+            // console.log(state);
             return state;
 
         case UPDATE_NEW_POST_TEXT:
