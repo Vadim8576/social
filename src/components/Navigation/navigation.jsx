@@ -8,6 +8,7 @@ const Navigation = () => {
             <ul>
                 <NavItem link='/posts' item='Мои посты'/>
                 <NavItem link='/dialogs' item='Сообщения'/>
+                <NavItem link='/users' item='Пользователи'/>
                 <NavItem link='/news' item='Новости'/>
                 <NavItem link='/foto' item='Фотографии'/>
                 <NavItem link='/setting' item='Настройки'/>

@@ -3,6 +3,7 @@ import Header from './components/Header/header';
 import Navigation from './components/Navigation/navigation';
 import PostsContainer from './components/Pages/Posts/postsContainer';
 import DialogsContainer from './components/Pages/Dialogs/dialogsContainer';
+import UsersContainer from './components/Pages/Users/usersContainer';
 import News from './components/Pages/News/News';
 import Fotos from './components/Pages/Fotos/Fotos';
 import Footer from './components/Footer/footer';
@@ -23,6 +24,9 @@ const App = (props) => {
 
         <Route path='/posts' render={() =>
           <PostsContainer /> } />
+
+        <Route path='/users' render={() =>
+          <UsersContainer /> } />
 
         <Route path='/news' component={News} />
         <Route path='/foto' component={Fotos} />          
