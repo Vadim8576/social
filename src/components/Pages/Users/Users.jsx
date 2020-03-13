@@ -2,37 +2,32 @@ import React from 'react';
 import css from './users.module.css';
 import * as axios from 'axios';
 
-let Users = (props) => {
 
-    console.log(props.users.length);
+class Users extends React.Component {
 
-    if(props.users.length === 0) {
-        axios
+    constructor(props){
+        super(props);
+
+       //Запрос на сервер произойдет при создании классовой компоненты один раз.
+       axios
             .get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
-                props.setUsers(response.data.items);      
-            })
+                this.props.setUsers(response.data.items);      
+        })
     }
 
-    // if(props.users.length === 0) {
-    //     props.setUsers([
-    //         {id: 1, photoUrl: 'images/UserPhoto.jpg', followed: true, fullName: 'Vadim', status: 'I am a boss', location: {city: 'SPb', country: 'Russia'} },
-    //         {id: 2, photoUrl: 'images/UserPhoto.jpg', followed: false, fullName: 'Sergey', status: 'I am a driver', location: {city: 'Moscow', country: 'Russia'} },
-    //         {id: 3, photoUrl: 'images/UserPhoto.jpg', followed: false, fullName: 'Nikolas', status: 'Hello!', location: {city: 'LA', country: 'USA'} }
-    //     ])
-    // };
-
-    return <div>
+    render() {
+        return <div>
         {
-            props.users.map(u => <div key={u.id}>
+            this.props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} />
                         </div>
                         <div>
                             {u.followed ?
-                            <button onClick={ () => props.unfollow(u.id) }>Убрать из друзей</button>:
-                            <button onClick={ () => props.follow(u.id) }>Добавить в друзья</button>}      
+                            <button onClick={ () => this.props.unfollow(u.id) }>Убрать из друзей</button>:
+                            <button onClick={ () => this.props.follow(u.id) }>Добавить в друзья</button>}      
                         </div>
                     </span>
                     <span>
@@ -48,6 +43,7 @@ let Users = (props) => {
                 </div>)
         }   
     </div>
+    }
 }
 
 export default Users;
