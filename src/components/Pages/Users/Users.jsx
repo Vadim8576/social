@@ -5,16 +5,22 @@ import * as axios from 'axios';
 
 class Users extends React.Component {
 
-    constructor(props){
-        super(props);
-
-       //Запрос на сервер произойдет при создании классовой компоненты один раз.
-       axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items);      
+    //////////////////////////// методы жизненного цикла
+    componentDidMount() {
+        //Запрос на сервер произойдет при создании классовой компоненты один раз.
+       // все SIDE ЭФФЕКТЫ делаются здесь
+        axios
+        .get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(response => {
+            this.props.setUsers(response.data.items);      
         })
     }
+
+    componentDidUpdate() {
+
+    }
+
+    /////////////////////////////////////////////////////////
 
     render() {
         return <div>
