@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header/header';
 import Navigation from './components/Navigation/navigation';
-import PostsContainer from './components/Pages/Posts/postsContainer';
+import ProfileContainer from './components/Pages/Profile/profileContainer';
 import DialogsContainer from './components/Pages/Dialogs/dialogsContainer';
 import UsersContainer from './components/Pages/Users/usersContainer';
 import News from './components/Pages/News/News';
@@ -23,7 +23,7 @@ const App = (props) => {
           <DialogsContainer />} />
 
         <Route path='/posts' render={() =>
-          <PostsContainer /> } />
+          <ProfileContainer /> } />
 
         <Route path='/users' render={() =>
           <UsersContainer /> } />
