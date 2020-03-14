@@ -1,3 +1,15 @@
 .avatar {
     width: 40px;
 }
+
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.noSelectedPage {
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0 5px;
+}
