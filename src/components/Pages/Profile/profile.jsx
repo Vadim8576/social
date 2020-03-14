@@ -1,17 +1,18 @@
 import React from 'react';
 import Post from './Posts/post';
-import css from './posts.module.css';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import css from './profile.module.css';
 
 
-const Posts = (props) => {
-//    debugger;
-    let post = props.profilePage.posts
+const Profile = (props) => {
+    
+    let post = props.posts
         .map((el) =>
         <Post key={el.id} message={el.message} likesCount={el.likesCount.toString()} />);
 
     return (
         <div> 
-            {/* <MyPosts> */}
+            <ProfileInfo />
             <div className={css.addPost}>
                 <h2>Мои посты</h2>
                 <div>
@@ -23,7 +24,6 @@ const Posts = (props) => {
                     <button onClick={ props.addPost }>Добавить пост</button>
                 </div>
             </div>
-            {/* </MyPosts> */}
             <div>
                {post}
             </div>
@@ -31,4 +31,4 @@ const Posts = (props) => {
     );
 }
 
-export default Posts;
+export default Profile;

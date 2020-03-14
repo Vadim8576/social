@@ -6,7 +6,7 @@ const Navigation = () => {
     return (
         <div className={css.nav}>
             <ul>
-                <NavItem link='/posts' item='Мои посты'/>
+                <NavItem link='/profile' item='Профиль'/>
                 <NavItem link='/dialogs' item='Сообщения'/>
                 <NavItem link='/users' item='Пользователи'/>
                 <NavItem link='/news' item='Новости'/>
