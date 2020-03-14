@@ -1,6 +1,6 @@
 import Posts from './posts';
 import { connect } from 'react-redux';
-import {addPostActionCreator, updateNewPostTextActionCreator} from '../../redux/postsReducer';
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../Redux/postsReducer';
 
 
 
