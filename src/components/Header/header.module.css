@@ -4,6 +4,7 @@
 }
   
   .header{
+    /* position: relative; */
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -17,9 +18,13 @@
    
   }
 
-  .title{
-    display: inline;
+  .loginBlock {
+    padding-right: 60px;
     color: white;
     font-size: 20px;
     padding-left: 30px;
+  }
+
+  .loginBlock a {
+    color: white;
   }

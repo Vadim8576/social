@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header/header';
+import HeaderContainer from './components/Header/headerContainer';
 import Navigation from './components/Navigation/navigation';
 import ProfileContainer from './components/Pages/Profile/profileContainer';
 import DialogsContainer from './components/Pages/Dialogs/dialogsContainer';
@@ -15,7 +15,7 @@ import { Route } from 'react-router-dom';
 const App = (props) => {
   return (    
     <div className="App">
-        <Header />
+        <HeaderContainer />
         <Navigation />
 
         {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
