@@ -22,7 +22,14 @@ const App = (props) => {
         <Route path='/dialogs' render={() =>
           <DialogsContainer />} />
 
-        <Route path='/profile' render={() =>
+
+        {/* благодаря withRouter появились новые параменты:
+        location и match (см. console)
+        получаем парамерт match.params.userId */}
+        {/* console.log(this.props); */}
+
+        {/* вопросительный знак означает, что параметр не обязителен */}
+        <Route path='/profile/:userId?' render={() => 
           <ProfileContainer /> } />
 
         <Route path='/users' render={() =>

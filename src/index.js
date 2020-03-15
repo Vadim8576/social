@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 
-
+// Компоненты обернутые <BrowserRouter>, могут использовать Контекст, созданный им.
     ReactDOM.render(
         <BrowserRouter>   
             <Provider store={store}>

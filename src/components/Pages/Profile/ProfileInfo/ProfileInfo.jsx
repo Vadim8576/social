@@ -1,18 +1,18 @@
 import React from 'react';
 import Preloader from '../../../common/preloader/preloader';
 import css from './profileInfo.module.css';
-
-
+import UserNoFoto from '../../../img/UserPhoto.jpg';
 
 const ProfileInfo = (props) => {
-    // console.log(props.profile);
+
     if(!props.profile) {
         return <Preloader />
     } 
 
     return (
         <div> 
-            {props.profile.photos.small && <div><img src={props.profile.photos.small} alt="profile-photo"/></div>}
+           
+            {props.profile.photos && <div><img src={props.profile.photos.small || UserNoFoto} className={css.photo} alt="profile-photo"/></div>}
             {props.profile.aboutMe && <div><p className={css.status}>Статус: {props.profile.aboutMe}</p></div>}
             
             <p>Мои контакты:</p>
