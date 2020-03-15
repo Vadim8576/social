@@ -1,16 +1,29 @@
 import React from 'react';
 import Profile from './profile';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
-import {addPostActionCreator, updateNewPostTextActionCreator} from '../../Redux/profileReducer';
-
+import {addPost, updateNewPostText, setUserProfile} from '../../Redux/profileReducer';
+import * as axios from 'axios';
 
 class ProfileContainer extends React.Component {
+    componentDidMount() {
+        axios
+        .get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        .then(response => {
+            // debugger;
+            this.props.setUserProfile(response.data);
+        })
+
+       
+        
+    }
     render() {
         return (
-            <Profile
-                onTextareaChange={this.props.onTextareaChange}
-                addPost={this.props.addPost}
-                posts={this.props.posts} />
+           <div>
+               <ProfileInfo {...this.props} />
+                <Profile {...this.props} />
+           </div>
+            
         )
     }
 }
@@ -21,19 +34,11 @@ let mapStateToProps = (state) => {
     return {
         profilePage: state.profilePage,
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        newPostText: state.profilePage.newPostText,
+        profile: state.profilePage.profile
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        onTextareaChange: (e) => {
-            let text = e.currentTarget.value;
-            dispatch( updateNewPostTextActionCreator(text) );
-        },
-        addPost: () => dispatch( addPostActionCreator() )
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile})(ProfileContainer);
 

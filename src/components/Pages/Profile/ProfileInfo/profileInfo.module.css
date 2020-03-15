@@ -1,3 +1,7 @@
 .addPost{
     margin-bottom: 40px;
 }
+
+.status {
+    color: red;
+}
