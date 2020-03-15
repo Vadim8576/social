@@ -44,7 +44,7 @@ const userReducer = (state = initialState, action) => {
                 // которые пришли с сервера
                 return {
                     ...state, users: action.users
-                }
+                }    
             case SET_CURRENT_PAGE:
                 return {
                     ...state, currentPage: action.currentPage

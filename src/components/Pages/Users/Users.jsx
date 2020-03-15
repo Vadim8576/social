@@ -32,21 +32,12 @@ let Users = (props) => {
                                         <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} />
                                     </NavLink>
                                 </div>
+                                <div>{u.name}</div>
                                 <div>
                                     {u.followed ?
-                                    <button onClick={ () => props.unfollow(u.id) }>Убрать из друзей</button>:
-                                    <button onClick={ () => props.follow(u.id) }>Добавить в друзья</button>}      
+                                    <button onClick={ () => props.unfollow(u.id) }>Из друзей</button>:
+                                    <button onClick={ () => props.follow(u.id) }>В друзья</button>}      
                                 </div>
-                            </span>
-                            <span>
-                                <span>
-                                    <div>{u.name}</div>
-                                    <div>{'u.status'}</div>
-                                </span>
-                                <span>
-                                    <div>{'u.location.country'}</div>
-                                    <div>{'u.location.city'}</div>
-                                </span>
                             </span>
                         </div>)
                 }   

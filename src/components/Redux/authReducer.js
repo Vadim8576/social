@@ -8,7 +8,6 @@ let initialState = {
     isAuth: false
 };
 
-// isFetching -  получение данных. Показывать крутилку или нет (Preloader)
 
 const authReducer = (state = initialState, action) => {
 // изменяем только копию объекта state
