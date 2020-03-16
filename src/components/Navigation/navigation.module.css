@@ -1,12 +1,12 @@
 .nav{
-    grid-area: n;
+    /* grid-area: n; */
     /* background-color: black; */
-    border-right: 1px gray solid;
-    /* min-height: 500px; */
+    /* border-right: 1px gray solid; */
+    min-width: 200px;
   }
 
 .nav ul {
-  margin: 30px 0;
+  margin: 10px 0;
   
 }
   

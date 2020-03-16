@@ -4,8 +4,48 @@
 
 .status {
     color: red;
+    padding-bottom: 20px;
 }
 
-.photo {
-    width: 150px;
+
+.profileWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /* align-content: space-around; */
+    width: 100%;
+    margin-bottom: 15px;
+    
 }
+
+.profilePhotoWrapper, .profileInfo {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px #e7e8ec solid;
+    border-radius: 5px;
+}
+
+.profilePhotoWrapper {
+    /* padding: 15px; */
+    width: 33%;
+    margin-right: 15px;
+    
+}
+
+.profilePhoto {
+    width: 150px;
+    margin: 0 auto;
+ }
+
+.profilePhoto img {
+    width: 100%;
+}
+
+.profileInfo {
+    width: 67%;
+}
+
+/* .photo {
+    width: 150px;
+    margin: 0 auto;
+} */

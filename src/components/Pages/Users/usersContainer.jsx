@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching} from '../../redux/usersReducer';
+import {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, loadMore} from '../../redux/usersReducer';
 import * as axios from 'axios';
 import Users from './Users';
 import Preloader from './../../common/preloader/preloader';
@@ -16,11 +16,31 @@ class UsersContainer extends React.Component {
         axios
         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(response => {
+            // debugger;
             this.props.toggleIsFetching(false);
             this.props.setUsers(response.data.items);   
             this.props.setTotalUsersCount(response.data.totalCount);
         })
         
+    }
+
+    loadMore  = (page) => {
+        
+        this.props.setCurrentPage(page);
+        this.props.toggleIsFetching(true);
+        axios
+        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        .then(response => {
+            // debugger;
+            this.props.toggleIsFetching(false);
+            // this.props.toggleIsFetching(false);
+            this.props.loadMore(response.data.items);
+
+            console.log(response.data.items);
+            console.log('page='+page);
+            console.log('currentPage='+this.props.currentPage);
+
+        })
     }
 
     
@@ -42,7 +62,7 @@ class UsersContainer extends React.Component {
        
         return (
             <div>      
-                {this.props.isFetching ? <Preloader />:
+                {(this.props.isFetching && this.props.currentPage < 2) ? <Preloader />:
                 <Users totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize}
                         currentPage={this.props.currentPage}
@@ -50,6 +70,7 @@ class UsersContainer extends React.Component {
                         users={this.props.users}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
+                        loadMore={this.loadMore}
                 />}
                     
             </div>)
@@ -77,6 +98,7 @@ export default connect(
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleIsFetching
+    toggleIsFetching,
+    loadMore
     })(UsersContainer);
 /////////////////////////////////////

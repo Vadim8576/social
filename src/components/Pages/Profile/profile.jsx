@@ -4,27 +4,31 @@ import css from './profile.module.css';
 
 
 const Profile = (props) => {
+    // debugger;
     let post = props.posts
         .map((el) =>
-        <Post key={el.id} message={el.message} likesCount={el.likesCount.toString()} />);
+        <Post key={el.id} profile={props.profilePage.profile} message={el.message} likesCount={el.likesCount.toString()} />);
     // console.log(props.profile);
     return (
-        <div> 
-            <div className={css.addPost}>
-                <h2>Мои посты</h2>
-                <div>
+        <>
+            <div className={css.postsWrapper}> 
+                <div className={css.addPost}>
                     <textarea
                         onChange={ (e) => {props.updateNewPostText(e.currentTarget.value)} }
-                        value={ props.newPostText } />
-                </div>
-                <div>
-                    <button onClick={ () => props.addPost() }>Добавить пост</button>
+                        value={ props.newPostText }
+                        placeholder='Введите текст поста' />
+                
+                    <div className={css.addPostBtn}>
+                        <button onClick={ () => props.addPost() }>Опубликовать</button>
+                    </div>
                 </div>
             </div>
-            <div>
-               {post}
+            <div className={css.postsWrapper}>
+                <div className={css.posts}>
+                    {post}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

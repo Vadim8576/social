@@ -25,10 +25,10 @@ class ProfileContainer extends React.Component {
     }
     render() {
         return (
-           <div>
+           <>
                <ProfileInfo {...this.props} />
                 <Profile {...this.props} />
-           </div>
+           </>
             
         )
     }

@@ -1,9 +1,20 @@
 .item{
-  border-bottom: 1px mediumturquoise solid;
-  padding-left: 20px;
+  /* border-bottom: 1px mediumturquoise solid; */
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
   
 }
 
 .item img{
   width: 30px;
+}
+
+.item span {
+  padding-left: 15px;
+}
+
+.likes {
+  font-size: 10px;
+  color: blue;
 }

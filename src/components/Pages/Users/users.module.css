@@ -1,8 +1,8 @@
 .avatar {
-    width: 40px;
+    width: 50px;
 }
 
-.selectedPage {
+/* .selectedPage {
     font-weight: bold;
     cursor: pointer;
     margin: 0 5px;
@@ -12,4 +12,50 @@
     font-weight: normal;
     cursor: pointer;
     margin: 0 5px;
+} */
+
+
+.usersWrapper {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px #e7e8ec solid;
+    border-radius: 5px;
+    margin-bottom: 60px;
+}
+
+.usersWrapper .totalUsersCount {
+    padding-bottom: 15px;
+}
+
+.usersItem {
+    border-top: 1px #e7e8ec solid;
+    margin: 0 15px;
+    padding: 15px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.users {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users span {
+    padding: 10px;
+}
+
+.loadMoreBtnWrapper {
+    text-align: center;
+}
+
+.loadMoreBtnWrapper>button {
+    background-color: blue;
+    border: 1px #000 solid;
+    padding: 5px 20px;
+    color: yellow;
 }

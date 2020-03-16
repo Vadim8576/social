@@ -1,3 +1,28 @@
 .addPost{
-    margin-bottom: 40px;
+    /* margin-bottom: 30px; */
+    background-color: #fff;
+}
+
+.postsWrapper {
+    /* border: 1px yellow solid; */
+    background-color: #fff;
+    padding: 15px;
+    border: 1px #e7e8ec solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.posts {
+    
+    /* border: 1px yellow solid; */
+}
+
+.addPost textarea {
+    width: 99%;
+    resize: none;
+}
+
+.addPostBtn {
+    margin-top: 10px;
+    text-align: right;
 }
