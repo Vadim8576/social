@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './profile';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
-import {addPost, updateNewPostText, setUserProfile} from '../../Redux/profileReducer';
+import {addPost, updateNewPostText, setUserProfile} from '../../redux/profileReducer';
 import * as axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
