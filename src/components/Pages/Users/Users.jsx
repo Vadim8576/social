@@ -4,36 +4,28 @@ import { NavLink } from 'react-router-dom';
 import { usersAPI } from './../../../api/api';
 
 let Users = (props) => {
-    // debugger;
-
-    
-    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize); // округляем в большую сторону
-
-    // let pages = [];
-    // for(let i=1; i<=pagesCount; i++){
-    //     pages.push(i);
-    // }
-
 
     let follow = (id) => {
-       
+        props.toggleFollowingProgress(true, id);
         usersAPI.followUser(id)
             .then(data => {
                 // Если сервер не выдал ошибки, меняем state (подписываемся)
                 if(data.resultCode == 0) {
                     props.follow(id);
                 }
+                props.toggleFollowingProgress(false, id);
             });
     }
    
     let unfollow = (id) => {
-        
+        props.toggleFollowingProgress(true, id);
         usersAPI.unfollowUser(id)
         .then(data => {
             // Если сервер не выдал ошибки, меняем state (подписываемся)
             if(data.resultCode == 0) {
                 props.unfollow(id);
             }
+            props.toggleFollowingProgress(false, id);
         });
     }
 
@@ -46,35 +38,22 @@ let Users = (props) => {
                     <div className={css.users}>
                         <NavLink to={'/profile/'+u.id}>
                             <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} />
-                        </NavLink>
-                        
+                        </NavLink>        
                         <span>{u.name}</span>
                     </div>
                     <div className={css.follow}>
-                        {/* {u.followed ?
-                        <button onClick={ () => props.unfollow(u.id) }>Отписаться</button>:
-                        <button onClick={ () => props.follow(u.id) }>Подписаться</button>} */}
-                         {u.followed ?
-                        <button onClick={ () => unfollow(u.id) }>Отписаться</button>:
-                        <button onClick={ () => follow(u.id) }>Подписаться</button>}
+                        {/* изучить метод some */}
+                        {u.followed
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => unfollow(u.id)}>Отписаться</button>
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => follow(u.id) }>Подписаться</button>}
                     </div>
                 </div>)}  
                 {
                     (props.currentPage * props.pageSize) < props.totalUsersCount && (
-                        <div className={css.loadMoreBtnWrapper}>
-                            {/* {pages.map(p => {
-                            return (
-                                    <span key={p.id} className={props.currentPage === p ?
-                                        css.selectedPage:
-                                        css.noSelectedPage}
-                                        onClick={(e) => props.onPageChanged(p)}>{p}
-                                    </span>
-                            )
-                            })}              */}
-                            
+                        <div className={css.loadMoreBtnWrapper}>             
                             <button onClick={(e) => {
                                 let nextPage = props.currentPage+1;
-                                props.loadMore(nextPage);
+                                props.loadMoreUsers(nextPage);
                                 }}>Еще...</button>
                         </div>)
                 }

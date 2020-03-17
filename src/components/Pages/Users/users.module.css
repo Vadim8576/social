@@ -59,3 +59,9 @@
     padding: 5px 20px;
     color: yellow;
 }
+
+button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
