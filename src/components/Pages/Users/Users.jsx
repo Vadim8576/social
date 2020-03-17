@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './users.module.css';
 import { NavLink } from 'react-router-dom';
+import Preloader from './../../common/preloader/preloader';
 import { usersAPI } from './../../../api/api';
 
 let Users = (props) => {
@@ -51,10 +52,11 @@ let Users = (props) => {
                 {
                     (props.currentPage * props.pageSize) < props.totalUsersCount && (
                         <div className={css.loadMoreBtnWrapper}>             
+                            {props.isFetching ? <Preloader /> :
                             <button onClick={(e) => {
                                 let nextPage = props.currentPage+1;
                                 props.loadMoreUsers(nextPage);
-                                }}>Еще...</button>
+                                }}>Еще...</button>}
                         </div>)
                 }
             </div>

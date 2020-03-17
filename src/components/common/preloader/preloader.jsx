@@ -1,10 +1,10 @@
 import React from 'react';
-import preloader from '../../img/preloader.gif';
+import preloader from '../../img/loader.gif';
 
 let Preloader = () => {
     return (
         <div>
-            <img src={preloader} alt='preloader' style={{width: '80px'}}/>
+            <img src={preloader} alt='preloader' style={{width: '50px'}}/>
         </div>
     )
 }

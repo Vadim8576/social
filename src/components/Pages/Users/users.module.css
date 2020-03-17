@@ -33,16 +33,17 @@
     padding: 15px 0;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-
+    justify-content: flex-start;
+    /* align-items: center; */
+    flex-direction: column;
 }
 
 .users {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    /* align-items: center; */
+ 
 }
 
 .users span {

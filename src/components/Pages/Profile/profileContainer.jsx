@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId = 2; //по умолчанию запрашиваем свою страницу
+        if(!userId) userId = 6446; //по умолчанию запрашиваем свою страницу
         
         usersAPI.getProfile(userId)
         .then(data => {

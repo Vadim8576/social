@@ -47,6 +47,8 @@ loadMoreUsers  = (page) => {
                         loadMoreUsers={this.loadMoreUsers}
                         followingInProgress={this.props.followingInProgress}
                         toggleFollowingProgress={this.props.toggleFollowingProgress}
+                        toggleIsFetching={this.props.toggleIsFetching}
+                        isFetching={this.props.isFetching}
                 />}   
 
             </div>)
