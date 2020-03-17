@@ -1,3 +1,6 @@
+import { usersAPI } from './../../api/api';
+
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -96,6 +99,72 @@ export const setTotalUsersCount = (totalCount) => ( {type: SET_TOTAL_USERS_COUNT
 export const toggleIsFetching = (isFetching) => ( {type: TOGGLE_IS_FETCHING, isFetching} );
 export const loadMore = (users) => ( {type: LOAD_MORE, users} );
 export const toggleFollowingProgress = (isProgress, userId) => ( {type: TOGGLE_IS_FOLLOWING_PROGRESS, isProgress, userId} );
+
+
+
+// Thunk - Санк (санка)
+// В Санки диспатчим Action Creators
+// UI вызываем getUsersThunkCreator, чтобы создать САНКУ
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+
+        dispatch(toggleIsFetching(true));
+    
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));   
+                dispatch(setTotalUsersCount(data.totalCount));
+            });
+    }
+}
+
+export const loadMoreUsers = (page, pageSize) => {
+    return (dispatch) => {
+       
+        dispatch(setCurrentPage(page));
+        dispatch(toggleIsFetching(true));
+
+        usersAPI.getUsers(page, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(loadMore(data.items));
+        })
+    }
+}
+
+export const followUser = (id) => {
+    return (dispatch) => {
+       
+        dispatch(toggleFollowingProgress(true, id));
+        
+        usersAPI.followToUser(id)
+            .then(data => {
+                // Если сервер не выдал ошибки, меняем state (подписываемся)
+                if(data.resultCode === 0) {
+                    dispatch(follow(id));
+                }
+                dispatch(toggleFollowingProgress(false, id));
+            });
+    }
+}
+
+
+export const unfollowUser = (id) => {
+    return (dispatch) => {
+       
+        dispatch(toggleFollowingProgress(true, id));
+        
+        usersAPI.unfollowToUser(id)
+        .then(data => {
+            // Если сервер не выдал ошибки, меняем state (подписываемся)
+            if(data.resultCode === 0) {
+                dispatch(unfollow(id));
+            }
+            dispatch(toggleFollowingProgress(false, id));
+        });
+    }
+}
 
 
 export default userReducer;

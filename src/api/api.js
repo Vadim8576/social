@@ -13,13 +13,23 @@ const instanse = axios.create({
 
 export const usersAPI = {
 
+   // Запрос на аудентификацию
+   
+    setAuth() {
+        return instanse
+                .get(`auth/me`)
+                .then(response => response.data)        
+     },
+
+
+
     // Получить всех пользователей
     //{ withCredentials: true} - делаем запрос от авторизованного пользователя
 
     getUsers(currentPage, pageSize) {
-        return (instanse
+        return instanse
                 .get(`users?page=${currentPage}&count=${pageSize}`)
-                .then(response => response.data)  ) 
+                .then(response => response.data)
     },
 
 
@@ -41,7 +51,7 @@ export const usersAPI = {
     // в POST запросе настройки передаются ТРЕТЬИМ параметром
     // { withCredentials: true }
     
-    followUser(id) {
+    followToUser(id) {
         return instanse
                 .post(`follow/${id}`)
                 .then(response => response.data)
@@ -53,7 +63,7 @@ export const usersAPI = {
     // Для отписки, мы шлем DELETE запрос
     // Настройки передаются ВТОРЫМ параметром { withCredentials: true }
     
-    unfollowUser(id) {
+    unfollowToUser(id) {
         return instanse
                 .delete(`follow/${id}`)
                 .then(response => response.data)

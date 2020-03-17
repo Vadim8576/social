@@ -2,26 +2,16 @@ import React from 'react';
 import Profile from './profile';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
-import { addPost, updateNewPostText, setUserProfile } from '../../redux/profileReducer';
-import { usersAPI } from './../../../api/api';
+import { addPost, updateNewPostText, setUserProfile, getUserProfile } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId = 6446; //по умолчанию запрашиваем свою страницу
-        
-        usersAPI.getProfile(userId)
-        .then(data => {
-            this.props.setUserProfile(data);
-        })
-
-        // console.log('благодаря withRouter появились новые параменты:');
-        // console.log('location и match');
-        // (см. console)
-        // console.log(this.props);
+        this.props.getUserProfile(userId);
         
     }
+
     render() {
         return (
            <>
@@ -49,5 +39,5 @@ let mapStateToProps = (state) => {
 // WithUrlDataContainerComponent, который и закинет в ProfileContainer данные из URLa
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile})(WithUrlDataContainerComponent);
 

@@ -1,3 +1,5 @@
+import { usersAPI } from './../../api/api';
+
 const SET_USER_DATA = 'SET_USER_DATA';
 
 
@@ -28,5 +30,21 @@ const authReducer = (state = initialState, action) => {
 //ActoinCreators:
 
 export const setAuthUserData = (userId, email, login) => ( {type: SET_USER_DATA, data: {userId, email, login}} );
+
+
+export const Authentication = () => {
+    
+    return (dispatch) => {
+
+        usersAPI.setAuth()
+            .then(data => {
+                let {id, email, login} = data.data;
+                if(data.resultCode === 0) {
+                    dispatch(setAuthUserData(id, email, login));
+                }
+            })
+    }
+}
+
 
 export default authReducer;
