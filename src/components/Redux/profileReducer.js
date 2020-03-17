@@ -50,8 +50,6 @@ export const setUserProfile = (profile) => ( {type: SET_USER_PROFILE, profile} )
 export const getUserProfile = (userId) => {
     
     return (dispatch) => {
-   
-        if(!userId) userId = 6446; //по умолчанию запрашиваем свою страницу
         
         usersAPI.getProfile(userId)
         .then(data => {

@@ -8,6 +8,8 @@ import { withRouter } from 'react-router-dom';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
+        // 6446 - мой ID
+        if(!userId) userId = 6446; //по умолчанию запрашиваем свою страницу
         this.props.getUserProfile(userId);
         
     }

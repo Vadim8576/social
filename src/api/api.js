@@ -10,18 +10,7 @@ const instanse = axios.create({
 });
 
 
-
 export const usersAPI = {
-
-   // Запрос на аудентификацию
-   
-    setAuth() {
-        return instanse
-                .get(`auth/me`)
-                .then(response => response.data)        
-     },
-
-
 
     // Получить всех пользователей
     //{ withCredentials: true} - делаем запрос от авторизованного пользователя
@@ -32,8 +21,6 @@ export const usersAPI = {
                 .then(response => response.data)
     },
 
-
-
     // получить страницу пользователя
 
     getProfile(userId) {
@@ -41,7 +28,6 @@ export const usersAPI = {
             .get(`profile/${userId}`)
             .then(response => response.data)
      },
-    
     
 
     // Подписка на Юзера
@@ -54,8 +40,7 @@ export const usersAPI = {
     followToUser(id) {
         return instanse
                 .post(`follow/${id}`)
-                .then(response => response.data)
-                 
+                .then(response => response.data)       
      },
     
     
@@ -66,8 +51,18 @@ export const usersAPI = {
     unfollowToUser(id) {
         return instanse
                 .delete(`follow/${id}`)
-                .then(response => response.data)
-                 
+                .then(response => response.data)      
      }
 
+}
+
+
+export const authAPI = {
+    // Запрос на аудентификацию
+   
+    me() {
+        return instanse
+                .get(`auth/me`)
+                .then(response => response.data)        
+     }
 }
