@@ -22,7 +22,7 @@ let Users = (props) => {
         usersAPI.unfollowUser(id)
         .then(data => {
             // Если сервер не выдал ошибки, меняем state (подписываемся)
-            if(data.resultCode == 0) {
+            if(data.resultCode === 0) {
                 props.unfollow(id);
             }
             props.toggleFollowingProgress(false, id);
@@ -37,7 +37,7 @@ let Users = (props) => {
                 <div key={u.id} className={css.usersItem}>
                     <div className={css.users}>
                         <NavLink to={'/profile/'+u.id}>
-                            <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} />
+                            <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} alt='' />
                         </NavLink>        
                         <span>{u.name}</span>
                     </div>
