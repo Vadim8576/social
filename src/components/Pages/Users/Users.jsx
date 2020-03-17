@@ -10,7 +10,7 @@ let Users = (props) => {
         usersAPI.followUser(id)
             .then(data => {
                 // Если сервер не выдал ошибки, меняем state (подписываемся)
-                if(data.resultCode == 0) {
+                if(data.resultCode === 0) {
                     props.follow(id);
                 }
                 props.toggleFollowingProgress(false, id);

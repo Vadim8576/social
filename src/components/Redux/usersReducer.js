@@ -32,7 +32,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.isProgress
                 ? [...state.followingInProgress, action.userId]
-                : state.followingInProgress.filter(id => id != action.userId)
+                : state.followingInProgress.filter(id => id !== action.userId)
             };
         case FOLLOW:
             return {
