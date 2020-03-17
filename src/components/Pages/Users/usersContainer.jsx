@@ -7,43 +7,36 @@ import Preloader from './../../common/preloader/preloader';
 
 
 class UsersContainer extends React.Component {
-
     //////////////////////////// методы жизненного цикла
     componentDidMount() {
         this.props.toggleIsFetching(true);
         //Запрос на сервер произойдет при создании классовой компоненты один раз.
        // все SIDE ЭФФЕКТЫ делаются здесь
+
+       //{ withCredentials: true} - делаем запрос от авторизованного пользователя
         axios
-        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+        { withCredentials: true })
         .then(response => {
-            // debugger;
             this.props.toggleIsFetching(false);
             this.props.setUsers(response.data.items);   
             this.props.setTotalUsersCount(response.data.totalCount);
-        })
-        
+        });
     }
 
     loadMore  = (page) => {
-        
         this.props.setCurrentPage(page);
         this.props.toggleIsFetching(true);
         axios
-        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+        { withCredentials: true })
         .then(response => {
-            // debugger;
             this.props.toggleIsFetching(false);
             // this.props.toggleIsFetching(false);
             this.props.loadMore(response.data.items);
-
-            console.log(response.data.items);
-            console.log('page='+page);
-            console.log('currentPage='+this.props.currentPage);
-
         })
     }
 
-    
     /////////////////////////////////////////////////////////
 
     onPageChanged = (pageNumber) => {
@@ -55,11 +48,9 @@ class UsersContainer extends React.Component {
             this.props.toggleIsFetching(false);
             this.props.setUsers(response.data.items);
         })
-        
     }
 
     render() {
-       
         return (
             <div>      
                 {(this.props.isFetching && this.props.currentPage < 2) ? <Preloader />:
@@ -71,12 +62,10 @@ class UsersContainer extends React.Component {
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
                         loadMore={this.loadMore}
-                />}
-                    
+                />}   
             </div>)
     }
 }
-
 
 
 //////////////////////////////// react-redux
@@ -89,7 +78,6 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-
 
 export default connect(
     mapStateToProps,
