@@ -8,7 +8,8 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../..
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
-        newMessageBody: state.dialogsPage.newMessageBody
+        newMessageBody: state.dialogsPage.newMessageBody,
+        isAuth: state.auth.isAuth
     }
 }
 

@@ -6,6 +6,7 @@ import DialogsContainer from './components/Pages/Dialogs/dialogsContainer';
 import UsersContainer from './components/Pages/Users/usersContainer';
 import News from './components/Pages/News/News';
 import Fotos from './components/Pages/Fotos/Fotos';
+import LoginPage from './components/Login/Login';
 import './App.css';
 import { Route } from 'react-router-dom';
 
@@ -22,7 +23,6 @@ const App = (props) => {
             {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
             <Route path='/dialogs' render={() =>
               <DialogsContainer />} />
-          
 
             {/* благодаря withRouter появились новые параменты:
             location и match (см. console)
@@ -35,6 +35,9 @@ const App = (props) => {
 
             <Route path='/users' render={() =>
               <UsersContainer /> } />
+
+            <Route path='/login' render={() =>
+              <LoginPage /> } />
 
             <Route path='/news' component={News} />
             <Route path='/foto' component={Fotos} />    
