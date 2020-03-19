@@ -3,7 +3,8 @@ import Profile from './profile';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
 import { addPost, updateNewPostText, setUserProfile, getUserProfile } from '../../redux/profileReducer';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import withAuthRedirect from '../../../hoc/withAuthRedirect';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -15,10 +16,6 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-
-        // Если не залогинился redirect на компонент Login
-        if(!this.props.isAuth) return <Redirect to={'/Login'} />
-
         return (
            <>
                <ProfileInfo {...this.props} />
@@ -31,20 +28,34 @@ class ProfileContainer extends React.Component {
 
 
 
+
+
+// это HOC - компонент высшего порядка (Hight Order Component)
+// оборачиваем им ProfileContainer для того чтобы вынести логику Редиректа
+// и использовать ее в других компонентах
+// компонент ProfileContainer стала с (with) AuthRedirect`ом
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+
+
 let mapStateToProps = (state) => {
     return {
         profilePage: state.profilePage,
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth
+        profile: state.profilePage.profile
     }
 }
 
 // ProfileContainer должен получить данные из URLa,
 // поэтому засовываем его в функцию withRouter, которая возвращает еще один компонент - 
 // WithUrlDataContainerComponent, который и закинет в ProfileContainer данные из URLa
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+// Это тоже HOC
 
+// компонент AuthRedirectComponent стала с (with) Router`ом
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+
+
+// connect -  тоже HOC
 export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile})(WithUrlDataContainerComponent);
 

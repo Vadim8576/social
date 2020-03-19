@@ -4,6 +4,7 @@ import { follow, unfollow, setCurrentPage, toggleFollowingProgress } from '../..
 import { getUsers, loadMoreUsers, followUser, unfollowUser } from '../../redux/usersReducer';
 import Users from './Users';
 import Preloader from './../../common/preloader/preloader';
+import withAuthRedirect from '../../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component {
@@ -59,7 +60,7 @@ let mapStateToProps = (state) => {
 
 // connect создает callback, который задиспатчит то,
 // что вернет ActionCreator
-export default connect(
+export default withAuthRedirect(connect(
     mapStateToProps,
     {follow,
     unfollow,
@@ -69,5 +70,5 @@ export default connect(
     loadMoreUsers,
     followUser,
     unfollowUser
-    })(UsersContainer);
+    })(UsersContainer));
 /////////////////////////////////////
