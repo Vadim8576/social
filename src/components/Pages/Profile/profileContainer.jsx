@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { addPost, updateNewPostText, setUserProfile, getUserProfile } from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -28,16 +29,6 @@ class ProfileContainer extends React.Component {
 
 
 
-
-
-// это HOC - компонент высшего порядка (Hight Order Component)
-// оборачиваем им ProfileContainer для того чтобы вынести логику Редиректа
-// и использовать ее в других компонентах
-// компонент ProfileContainer стала с (with) AuthRedirect`ом
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-
-
 let mapStateToProps = (state) => {
     return {
         profilePage: state.profilePage,
@@ -47,15 +38,34 @@ let mapStateToProps = (state) => {
     }
 }
 
+
+
+
+// это HOC - компонент высшего порядка (Hight Order Component)
+// оборачиваем им ProfileContainer для того чтобы вынести логику Редиректа
+// и использовать ее в других компонентах
+// компонент ProfileContainer стал с (with) AuthRedirect`ом
+
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+
 // ProfileContainer должен получить данные из URLa,
 // поэтому засовываем его в функцию withRouter, которая возвращает еще один компонент - 
 // WithUrlDataContainerComponent, который и закинет в ProfileContainer данные из URLa
 // Это тоже HOC
 
 // компонент AuthRedirectComponent стала с (with) Router`ом
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
 
 // connect -  тоже HOC
-export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile})(WithUrlDataContainerComponent);
+// export default connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile})(WithUrlDataContainerComponent);
 
+
+
+export default compose(
+    connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);

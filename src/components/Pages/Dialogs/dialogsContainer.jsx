@@ -3,19 +3,7 @@ import Dialogs from './dialogs';
 import { connect } from 'react-redux';
 import { sendMessageActionCreator, updateNewMessageBodyActionCreator } from '../../../components/redux/dialogsReducer';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
-
-
-
-
-
-// это HOC - компонент высшего порядка (Hight Order Component)
-// оборачиваем им Dialogs для того чтобы вынести логику Редиректа
-// и использовать ее в других компонентах
-// компонент Dialogs стала с (with) AuthRedirect`ом
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
-
-
-
+import { compose } from 'redux';
 
 
 
@@ -38,9 +26,24 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+
+
+
+// это HOC - компонент высшего порядка (Hight Order Component)
+// оборачиваем им Dialogs для того чтобы вынести логику Редиректа
+// и использовать ее в других компонентах
+// компонент Dialogs стала с (with) AuthRedirect`ом
+// let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+
+
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 // connect имеет свой метод subscribe,
 // который следит,
 // когда измениться state (dialogsPage) из mapStateToProps
 /////////////////////////////////////////////////
-export default DialogsContainer;
+// export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);

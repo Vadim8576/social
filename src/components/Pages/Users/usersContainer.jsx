@@ -5,6 +5,7 @@ import { getUsers, loadMoreUsers, followUser, unfollowUser } from '../../redux/u
 import Users from './Users';
 import Preloader from './../../common/preloader/preloader';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 class UsersContainer extends React.Component {
@@ -60,15 +61,33 @@ let mapStateToProps = (state) => {
 
 // connect создает callback, который задиспатчит то,
 // что вернет ActionCreator
-export default withAuthRedirect(connect(
-    mapStateToProps,
-    {follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    loadMoreUsers,
-    followUser,
-    unfollowUser
-    })(UsersContainer));
+// export default withAuthRedirect(connect(
+//     mapStateToProps,
+//     {follow,
+//     unfollow,
+//     setCurrentPage,
+//     toggleFollowingProgress,
+//     getUsers,
+//     loadMoreUsers,
+//     followUser,
+//     unfollowUser
+//     })(UsersContainer));
 /////////////////////////////////////
+
+
+
+
+// Как бы оборачиваем компонент UsersContainer в connect, а потом в withAuthRedirect
+export default compose (
+    withAuthRedirect,
+    connect(
+        mapStateToProps,
+        {follow,
+        unfollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+        loadMoreUsers,
+        followUser,
+        unfollowUser})
+)(UsersContainer)
