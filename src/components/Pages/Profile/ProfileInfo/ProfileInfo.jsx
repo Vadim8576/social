@@ -2,6 +2,7 @@ import React from 'react';
 import css from './profileInfo.module.css';
 import Preloader from '../../../common/preloader/preloader';
 import UserNoFoto from '../../../img/UserPhoto.jpg';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
     // debugger;
@@ -19,8 +20,10 @@ const ProfileInfo = (props) => {
 
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
+
+                <ProfileStatus status={"Статус"} />
              
-                {props.profile.aboutMe && <div className={css.status}><span>Статус: {props.profile.aboutMe}</span></div>}
+                {/* {props.profile.aboutMe && <div className={css.status}><span>Статус: {props.profile.aboutMe}</span></div>} */}
               
                 Мои контакты:
                 {props.profile.contacts && 
