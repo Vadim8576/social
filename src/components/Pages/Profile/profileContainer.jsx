@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component {
                     {...this.props}
                     staus={this.props.status}
                     updateStatus={this.props.updateStatus} />
-                    
+
                 <Profile {...this.props} />
            </>
             
@@ -72,11 +72,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile, getUserStatus, updateStatus}),
-    withRouter
+    withRouter,
+    withAuthRedirect
 )(ProfileContainer);
-
-// export default compose(
-//     connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile}),
-//     withRouter,
-//     withAuthRedirect
-// )(ProfileContainer);
