@@ -8,6 +8,13 @@ class ProfileStatus extends React.Component {
         status: this.props.status
     }
 
+    componentDidUpdate = (prevProps, prevState) => {
+        // проверка нужна, чтобы не зациклить
+        if(prevProps.status !== this.props.status) {
+            this.setState( {status: this.props.status} )
+        }
+    }
+
     // Если здесь создать эту функцию обычным способом, потеряется контекст, поэтому делаем стрелочную функцию
     activateEditMode = () => {
         console.log(this.state.editMode); // выведет false
