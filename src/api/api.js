@@ -21,15 +21,6 @@ export const usersAPI = {
                 .then(response => response.data)
     },
 
-    // получить страницу пользователя
-
-    getProfile(userId) {
-        return instanse
-            .get(`profile/${userId}`)
-            .then(response => response.data)
-     },
-    
-
     // Подписка на Юзера
     // POST запрос на подписку на пользователя.
     // Только после ответа сервера, что мы подписались, меняем state.
@@ -52,8 +43,40 @@ export const usersAPI = {
         return instanse
                 .delete(`follow/${id}`)
                 .then(response => response.data)      
+     },
+
+      // получить страницу пользователя
+
+    getProfile(userId) {
+        console.warn('Используется старый метод');
+        return profileAPI.getProfile(userId);
      }
 
+}
+
+
+export const profileAPI = {
+
+    // получить страницу пользователя
+
+    getProfile(userId) {
+        return instanse
+            .get(`profile/${userId}`)
+            .then(response => response.data)
+    },
+
+    getStatus(userId) {
+        return instanse
+            .get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+
+    updateStatus(status) {
+        // у PUT и POST запросов есть второй параметр
+        return instanse
+            .put(`profile/status`, { status })
+            .then(response => response.data)
+    }
 }
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './profile';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
-import { addPost, updateNewPostText, setUserProfile, getUserProfile } from '../../Redux/profileReducer';
+import { addPost, updateNewPostText, setUserProfile, getUserProfile, getUserStatus, updateStatus } from '../../Redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -13,13 +13,18 @@ class ProfileContainer extends React.Component {
         // 6446 - мой ID
         if(!userId) userId = 6446; //по умолчанию запрашиваем свою страницу
         this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
         
     }
 
     render() {
         return (
            <>
-               <ProfileInfo {...this.props} />
+               <ProfileInfo
+                    {...this.props}
+                    staus={this.props.status}
+                    updateStatus={this.props.updateStatus} />
+                    
                 <Profile {...this.props} />
            </>
             
@@ -34,7 +39,8 @@ let mapStateToProps = (state) => {
         profilePage: state.profilePage,
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 
@@ -65,7 +71,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile}),
+    connect(mapStateToProps, {updateNewPostText, addPost, setUserProfile, getUserProfile, getUserStatus, updateStatus}),
     withRouter
 )(ProfileContainer);
 
