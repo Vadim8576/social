@@ -21,7 +21,7 @@ const ProfileInfo = (props) => {
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
 
-                <ProfileStatus status={"Статус"} />
+                <ProfileStatus status={"Здесь будет твой статус"} />
              
                 {/* {props.profile.aboutMe && <div className={css.status}><span>Статус: {props.profile.aboutMe}</span></div>} */}
               
