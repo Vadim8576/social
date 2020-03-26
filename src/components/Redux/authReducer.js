@@ -1,4 +1,5 @@
 import { authAPI } from './../../api/api';
+import { stopSubmit } from 'redux-form';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -32,6 +33,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ( {type: SET_US
     payload: {userId, email, login, isAuth}} );
 
 
+// у Димыча называется getAuthUserData
 export const Authentication = () => (dispatch) => {
         authAPI.me()
             .then(data => {
@@ -49,7 +51,11 @@ export const login = (email, password, rememberMe) => (dispatch) => {
             .then(data => {
                 if(data.resultCode === 0) {
                     // после залогинивания, снова вызываем thunk`у Authentication
-                    dispatch(Authentication());
+                    dispatch(Authentication()); // у Димыча называется getAuthUserData
+                } else {
+                    // let action = stopSubmit('login', {email: 'Неверный email'});
+                    let action = stopSubmit('login', {_error: 'email или password введены не верно!'}); //stopSubmit - Экшн криейтор из redux-form
+                    dispatch(action);
                 }
             })
 }
