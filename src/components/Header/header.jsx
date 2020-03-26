@@ -16,7 +16,11 @@ const Header = (props) => {
                 {/* {props.profile.photos &&<img src={props.profile.photos.small || UserNoFoto} alt="profile-photo"/>} */}
             </div>
             <div className={css.loginBlock}>
-                {props.isAuth ? props.login
+                {props.isAuth?
+                    <div>
+                        {props.login}
+                        <div><button onClick={props.logout}>Выйти</button></div>
+                    </div>
                 : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </div>
