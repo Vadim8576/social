@@ -2,9 +2,13 @@ import React from 'react';
 import Message from './Message/message'
 import css from './messages.module.css';
 import {reduxForm, Field} from 'redux-form';
+import { requiredField, maxLengthCreator } from '../../../../utils/validators/validators';
+import { Textarea } from '../../../common/formsControls/formsControls';
 
 
 // props.handleSubmit метод из redux-form
+
+const maxLength10 = maxLengthCreator(10);
 
 const MessagesForm = (props) => {
     return (
@@ -13,7 +17,8 @@ const MessagesForm = (props) => {
                     value={ props.dialogsPage.newMessageBody }
                     placeholder='Enter your message'
                     onChange={ props.onNewMessageChange } /> */}
-            <Field placeholder={'Введите сообщение'} name={'messagesForm'} component={'textarea'} />
+            <Field placeholder={'Введите сообщение'} name={'messagesForm'} component={Textarea}
+            validate={[requiredField, maxLength10]} />
             <div>
                 <button>Send</button>
             </div>

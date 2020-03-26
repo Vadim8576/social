@@ -1,7 +1,9 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import { Input } from '../common/formsControls/formsControls';
+import { requiredField, maxLengthCreator } from '../../utils/validators/validators';
 
-
+const maxLength10 = maxLengthCreator(10);
 
 const LoginForm = (props) => {
     return (
@@ -9,12 +11,14 @@ const LoginForm = (props) => {
             <div>
                 {/* <input placeholder={'Login'} /> */}
                 {/* Вместо input используем Field - Это типа контейнерный компонент */}
-                <Field placeholder={'login'} name={'login'} component={'input'} />
+                <Field placeholder={'login'} name={'login'} component={Input}
+                    validate={[requiredField, maxLength10]} />
                 
             </div>
             <div>
                 {/* <input placeholder={'Password'} /> */}
-                <Field placeholder={'Password'} name={'Password'} component={'input'} />
+                <Field placeholder={'Password'} name={'Password'} component={Input}
+                    validate={[requiredField, maxLength10]} />
             </div>
             <div>
                 {/* <input type={'checkbox'} /> remember me */}
