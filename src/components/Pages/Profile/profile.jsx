@@ -2,8 +2,10 @@ import React from 'react';
 import Post from './Posts/post';
 import css from './profile.module.css';
 import {reduxForm, Field} from 'redux-form';
+import { requiredField, maxLengthCreator } from '../../../utils/validators/validators';
+import { Textarea } from '../../common/formsControls/formsControls';
 
-
+const maxLength10 = maxLengthCreator(10);
 
 const PostForm = (props) => {
 
@@ -11,13 +13,9 @@ const PostForm = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div className={css.postsWrapper}> 
                 <div className={css.addPost}>
-                    {/* <textarea
-                        onChange={ (e) => {props.updateNewPostText(e.currentTarget.value)} }
-                        value={ props.newPostText }
-                        placeholder='Введите текст поста' /> */}
-                    <Field placeholder={'Введите текст поста'} name={'postText'} component={'textarea'} />
+                    <Field placeholder={'Введите текст поста'} name={'postText'} component={Textarea}
+                        validate={[requiredField, maxLength10]} />
                     <div className={css.addPostBtn}>
-                        {/* <button onClick={ () => props.addPost() }>Опубликовать</button> */}
                         <button>Опубликовать</button>
                     </div>
                 </div>
