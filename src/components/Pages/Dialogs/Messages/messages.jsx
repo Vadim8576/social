@@ -1,25 +1,48 @@
 import React from 'react';
 import Message from './Message/message'
 import css from './messages.module.css';
+import {reduxForm, Field} from 'redux-form';
 
 
+// props.handleSubmit метод из redux-form
+
+const MessagesForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            {/* <textarea
+                    value={ props.dialogsPage.newMessageBody }
+                    placeholder='Enter your message'
+                    onChange={ props.onNewMessageChange } /> */}
+            <Field placeholder={'Введите сообщение'} name={'messagesForm'} component={'textarea'} />
+            <div>
+                <button>Send</button>
+            </div>
+            
+            {/* <button onClick={ props.onSendMessageClick }>Send</button> */}
+        </form>
+    )
+}
  
+// { form: 'messages' } это уникальное имя формы, так как форм может быть много
+const MessagesReduxForm = reduxForm({ form: 'messages' })(MessagesForm)
+
+
 const Messages = (props) => {
     // debugger;
     let messages = props.dialogsPage.messages
     .map(el => <Message key={el.id} messages={el.messages} />);
     
-    // let newMessageBody = props.dialogsPage.newMessageBody;
+     // Необходимо передать эту функцию в HOC
+    const onSubmit = (formData) => {
+        console.log(formData.messagesForm);
+        props.onSendMessageClick(formData.messagesForm);
+    }
     
     return (
         <div className={css.dialogs__messages}>
             {messages}
             <div>
-                <div><textarea
-                    value={ props.dialogsPage.newMessageBody }
-                    placeholder='Enter your message'
-                    onChange={ props.onNewMessageChange } /></div>
-                <div><button onClick={ props.onSendMessageClick }>Send</button></div>
+                <MessagesReduxForm onSubmit={onSubmit} />
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+// const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
@@ -11,8 +11,7 @@ let initialState = {
         {id: 1, messages: 'Привет!'},
         {id: 2, messages: 'Как дела?'},
         {id: 3, messages: 'Yo!'},
-        {id: 4, messages: 'Пока!'}],
-    newMessageBody: ''
+        {id: 4, messages: 'Пока!'}]
 }
 
 
@@ -21,16 +20,16 @@ const dialogsReducer = (state = initialState, action) => {
     ///не имеем право менять state, поэтому работаем с копией 
     
     switch(action.type){
-        case UPDATE_NEW_MESSAGE_BODY: 
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
+        // case UPDATE_NEW_MESSAGE_BODY: 
+        //     return {
+        //         ...state,
+        //         newMessageBody: action.body
+        //     };
         case SEND_MESSAGE: 
-            let body = state.newMessageBody;
+            let body = action.newMessage;
+            // debugger;
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: 6, messages: body}]
             };
         default:
@@ -38,9 +37,9 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageActionCreator = () => ( {type: SEND_MESSAGE} );
+export const sendMessageActionCreator = (newMessage) => ( {type: SEND_MESSAGE, newMessage} );
 
-export const updateNewMessageBodyActionCreator = (text) => 
-    ( {type: UPDATE_NEW_MESSAGE_BODY, body: text} );
+// export const updateNewMessageBodyActionCreator = (text) => 
+//     ( {type: UPDATE_NEW_MESSAGE_BODY, body: text} );
 
 export default dialogsReducer;

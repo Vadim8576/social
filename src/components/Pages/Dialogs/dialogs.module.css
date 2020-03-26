@@ -4,3 +4,10 @@
 
 }
 
+.dialogs__items{
+  padding: 10px;
+}
+
+.active {
+  color: red;
+}
