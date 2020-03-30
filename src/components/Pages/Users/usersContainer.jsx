@@ -59,24 +59,6 @@ let mapStateToProps = (state) => {
 
 
 
-// connect создает callback, который задиспатчит то,
-// что вернет ActionCreator
-// export default withAuthRedirect(connect(
-//     mapStateToProps,
-//     {follow,
-//     unfollow,
-//     setCurrentPage,
-//     toggleFollowingProgress,
-//     getUsers,
-//     loadMoreUsers,
-//     followUser,
-//     unfollowUser
-//     })(UsersContainer));
-/////////////////////////////////////
-
-
-
-
 // Как бы оборачиваем компонент UsersContainer в connect, а потом в withAuthRedirect
 //withAuthRedirect для того, чтобы страница редиректилась на логин, если не залогинен
 export default compose (
