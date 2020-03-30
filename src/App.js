@@ -9,43 +9,57 @@ import Fotos from './components/Pages/Fotos/Fotos';
 import LoginPage from './components/Login/Login';
 import './App.css';
 import { Route } from 'react-router-dom';
-
+import { Authentication } from '../src/components/Redux/authReducer';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
  
 
-const App = (props) => {
-  return (    
-    <div className='App'>
-        <HeaderContainer />
-        <div className='wrapper'>
-          <Navigation />
+class App extends React.Component {
+  componentDidMount() {
 
-          <div className='content_wrapper'>
-            {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
-            <Route path='/dialogs' render={() =>
-              <DialogsContainer />} />
+    this.props.Authentication();
+    
+  }
 
-            {/* благодаря withRouter появились новые параменты:
-            location и match (см. console)
-            получаем парамерт match.params.userId */}
-            {/* console.log(this.props); */}
-
-            {/* вопросительный знак означает, что параметр не обязителен */}
-            <Route path='/profile/:userId?' render={() => 
-              <ProfileContainer /> } />
-
-            <Route path='/users' render={() =>
-              <UsersContainer /> } />
-
-            <Route path='/login' render={() =>
-              <LoginPage /> } />
-
-            <Route path='/news' component={News} />
-            <Route path='/foto' component={Fotos} />    
-          </div>  
-        </div>    
-    </div>   
-  );
+  render() {
+    return (    
+      <div className='App'>
+          <HeaderContainer />
+          <div className='wrapper'>
+            <Navigation />
+  
+            <div className='content_wrapper'>
+              {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
+              <Route path='/dialogs' render={() =>
+                <DialogsContainer />} />
+  
+              {/* благодаря withRouter появились новые параменты:
+              location и match (см. console)
+              получаем парамерт match.params.userId */}
+              {/* console.log(this.props); */}
+  
+              {/* вопросительный знак означает, что параметр не обязителен */}
+              <Route path='/profile/:userId?' render={() => 
+                <ProfileContainer /> } />
+  
+              <Route path='/users' render={() =>
+                <UsersContainer /> } />
+  
+              <Route path='/login' render={() =>
+                <LoginPage /> } />
+  
+              <Route path='/news' component={News} />
+              <Route path='/foto' component={Fotos} />    
+            </div>  
+          </div>    
+      </div>   
+    );
+  }
+  
 }
 
+export default compose(
+    connect(null, {Authentication})(App)
+);
 
-export default App;
+
