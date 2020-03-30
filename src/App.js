@@ -9,7 +9,7 @@ import Fotos from './components/Pages/Fotos/Fotos';
 import LoginPage from './components/Login/Login';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { Authentication } from '../src/components/Redux/authReducer';
+import { initializeApp } from '../src/components/Redux/appReducer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
  
@@ -17,7 +17,7 @@ import { compose } from 'redux';
 class App extends React.Component {
   componentDidMount() {
 
-    this.props.Authentication();
+    this.props.initializeApp();
     
   }
 
@@ -59,7 +59,7 @@ class App extends React.Component {
 }
 
 export default compose(
-    connect(null, {Authentication})(App)
+    connect(null, {initializeApp})(App)
 );
 
 

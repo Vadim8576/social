@@ -35,7 +35,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ( {type: SET_US
 
 // у Димыча называется getAuthUserData
 export const Authentication = () => (dispatch) => {
-        authAPI.me()
+        return authAPI.me()
             .then(data => {
                 let {id, email, login} = data.data;
                 if(data.resultCode === 0) {
