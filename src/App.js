@@ -12,6 +12,7 @@ import { Route } from 'react-router-dom';
 import { initializeApp } from '../src/components/Redux/appReducer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import Preloader from './components/common/preloader/preloader';
  
 
 class App extends React.Component {
@@ -22,6 +23,10 @@ class App extends React.Component {
   }
 
   render() {
+
+    // если еще не все загрузилось, покажем Прелоадер
+    if(!this.props.initialized) return <Preloader />
+
     return (    
       <div className='App'>
           <HeaderContainer />
@@ -58,8 +63,13 @@ class App extends React.Component {
   
 }
 
+
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
 export default compose(
-    connect(null, {initializeApp})(App)
+    connect(mapStateToProps, {initializeApp})(App)
 );
 
 

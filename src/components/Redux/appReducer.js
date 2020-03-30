@@ -33,7 +33,11 @@ export const initializedSuccess = () => ( {type: INITIALIZED_SUCCESS} );
 // у Димыча называется getAuthUserData
 export const initializeApp = () => (dispatch) => {
     // Thunk`a Authentication возвращает Promise
-    dispatch(Authentication())
+    let promise = dispatch(Authentication());
+
+    // если нужно дождаться нескольких запросов, помещаем их в массив Промисов
+
+    Promise.all([promise])
         .then(() => {
             dispatch(initializedSuccess());
         });

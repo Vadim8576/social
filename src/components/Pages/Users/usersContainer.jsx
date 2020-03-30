@@ -78,6 +78,7 @@ let mapStateToProps = (state) => {
 
 
 // Как бы оборачиваем компонент UsersContainer в connect, а потом в withAuthRedirect
+//withAuthRedirect для того, чтобы страница редиректилась на логин, если не залогинен
 export default compose (
     withAuthRedirect,
     connect(
