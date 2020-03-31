@@ -27,13 +27,29 @@ const PostForm = (props) => {
 // { form: 'postform' } это уникальное имя формы, так как форм может быть много
 const PostReduxForm = reduxForm({ form: 'postform' })(PostForm)
 
-const Profile = (props) => {
-    // debugger;
+
+
+// если использовать классовый компонент:
+// если использовать PureComponent, оптимизацию вручную делать не нужно
+// shouldComponentUpdate (метод жизненного цикла) можно удалить
+
+// для функционального компонента для оптимизации, оборачиваем ее в memo
+
+const Profile = React.memo(props => {
+
+    // опитимизация. Компонент рендерится 1 раз, если без этой функции - 3 раза.
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // возвращает true, если props`ы и statы не равны и рендерится
+    //     return nextProps != this.props || nextState != this.state;
+    // }
+
+  
+    console.log('компонент Profile');
+
     let post = props.posts
         .map((el) =>
         <Post key={el.id} profile={props.profilePage.profile} message={el.message} likesCount={el.likesCount.toString()} />);
-    // console.log(props.profile);
-
+    
     const onSubmit = (formData) => {
         console.log(formData.postText);
         props.addPost(formData.postText);
@@ -48,6 +64,7 @@ const Profile = (props) => {
             </div>
         </>
     );
-}
+
+});
 
 export default Profile;
