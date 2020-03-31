@@ -59,8 +59,12 @@ class UsersContainer extends React.Component {
 // }
 
 
+
+// getUsers(state) и остальные - это селекторы
+
 let mapStateToProps = (state) => {
     return {
+        // users: getUsers(state),
         users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
