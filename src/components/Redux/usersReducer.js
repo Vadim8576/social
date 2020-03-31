@@ -105,64 +105,60 @@ export const toggleFollowingProgress = (isProgress, userId) => ( {type: TOGGLE_I
 // Thunk - Санк (санка)
 // В Санки диспатчим Action Creators
 // UI вызываем getUsers, чтобы создать САНКУ
-export const requestUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
+export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
 
-        dispatch(toggleIsFetching(true));
-    
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false));
-                dispatch(setUsers(data.items));   
-                dispatch(setTotalUsersCount(data.totalCount));
-            });
-    }
+    dispatch(toggleIsFetching(true));
+
+    let response = await usersAPI.getUsers(currentPage, pageSize);
+
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.items));   
+    dispatch(setTotalUsersCount(response.totalCount));
 }
 
 export const loadMoreUsers = (page, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
        
         dispatch(setCurrentPage(page));
         dispatch(toggleIsFetching(true));
 
-        usersAPI.getUsers(page, pageSize)
-        .then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(loadMore(data.items));
-        })
+        let response = await usersAPI.getUsers(page, pageSize);
+
+        dispatch(toggleIsFetching(false));
+        dispatch(loadMore(response.items));
     }
 }
 
 export const followUser = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
        
         dispatch(toggleFollowingProgress(true, id));
         
-        usersAPI.followToUser(id)
-            .then(data => {
-                // Если сервер не выдал ошибки, меняем state (подписываемся)
-                if(data.resultCode === 0) {
-                    dispatch(follow(id));
-                }
-                dispatch(toggleFollowingProgress(false, id));
-            });
+        let response = await usersAPI.followToUser(id);
+
+        // Если сервер не выдал ошибки, меняем state (подписываемся)
+        if(response.resultCode === 0) {
+            dispatch(follow(id));
+        }
+        dispatch(toggleFollowingProgress(false, id));
+
     }
 }
 
 
 export const unfollowUser = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
        
         dispatch(toggleFollowingProgress(true, id));
         
-        usersAPI.unfollowToUser(id)
-        .then(data => {
-            // Если сервер не выдал ошибки, меняем state (подписываемся)
-            if(data.resultCode === 0) {
-                dispatch(unfollow(id));
-            }
-            dispatch(toggleFollowingProgress(false, id));
-        });
+        let response = await usersAPI.unfollowToUser(id)
+        
+        // Если сервер не выдал ошибки, меняем state (подписываемся)
+        if(response.resultCode === 0) {
+            dispatch(unfollow(id));
+        }
+        dispatch(toggleFollowingProgress(false, id));
+ 
     }
 }
 
