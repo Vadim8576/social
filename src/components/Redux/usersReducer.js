@@ -104,8 +104,8 @@ export const toggleFollowingProgress = (isProgress, userId) => ( {type: TOGGLE_I
 
 // Thunk - Санк (санка)
 // В Санки диспатчим Action Creators
-// UI вызываем getUsersThunkCreator, чтобы создать САНКУ
-export const getUsers = (currentPage, pageSize) => {
+// UI вызываем getUsers, чтобы создать САНКУ
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
 
         dispatch(toggleIsFetching(true));
