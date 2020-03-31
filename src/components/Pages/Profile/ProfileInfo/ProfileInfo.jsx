@@ -3,6 +3,7 @@ import css from './profileInfo.module.css';
 import Preloader from '../../../common/preloader/preloader';
 import UserNoFoto from '../../../img/UserPhoto.jpg';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     // debugger;
@@ -21,7 +22,8 @@ const ProfileInfo = (props) => {
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
 
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus} /> */}
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
              
                 {/* {props.profile.aboutMe && <div className={css.status}><span>Статус: {props.profile.aboutMe}</span></div>} */}
               
