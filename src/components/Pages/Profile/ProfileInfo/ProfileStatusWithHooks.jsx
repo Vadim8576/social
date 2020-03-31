@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import css from './profileInfo.module.css';
+
 
 
 const ProfileStatusWithHooks = (props) => {
@@ -10,23 +11,27 @@ const ProfileStatusWithHooks = (props) => {
     // при необходимости используется столько state, сколько нужно
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
+
+    // выполняет функцию, переданную в него, после того,
+    // как произойдет отрисовка, наподобии componentDidUpdate = (prevProps, prevState)
+    // это hook
+    useEffect( () => {
+        setStatus(props.status);
+
+    }, [props.status] ); // в [] указываются зависимости, если их нет, useEffect вызовется один раз
+    // если [] не указывать, useEffect будет вызываться при каждой отрисовке
     
     const activateEditMode = () => {
         setEditMode(true);
     }
 
     const deactivateEditMode = () => {
-        // this.setState( {editMode: false} );
-        // this.props.updateStatus(this.state.status);
-
         setEditMode(false);
         props.updateStatus(status);
     }
 
     const onStatusChange = (e) => {
-        // this.setState({
-        //     status: e.currentTarget.value
-        // })
+
         setStatus(e.currentTarget.value);
     }
 
