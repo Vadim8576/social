@@ -1,4 +1,5 @@
 import { usersAPI } from './../../api/api';
+import { updateObjectInArray } from '../../utils/objectHelper';
 
 
 const FOLLOW = 'FOLLOW';
@@ -40,22 +41,24 @@ const userReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if(u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
+                // users: state.users.map(u => {
+                //     if(u.id === action.userId) {
+                //         return {...u, followed: true}
+                //     }
+                //     return u;
+                // })
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if(u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
+                // users: state.users.map(u => {
+                //     if(u.id === action.userId) {
+                //         return {...u, followed: false}
+                //     }
+                //     return u;
+                // })
             };
             case SET_USERS:
                 // в копии state.users добавляем всех action.users,
@@ -107,7 +110,8 @@ export const toggleFollowingProgress = (isProgress, userId) => ( {type: TOGGLE_I
 // UI вызываем getUsers, чтобы создать САНКУ
 export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
 
-    dispatch(toggleIsFetching(true));
+    dispatch(toggleIsFetching(true))
+    dispatch(setCurrentPage(1));
 
     let response = await usersAPI.getUsers(currentPage, pageSize);
 

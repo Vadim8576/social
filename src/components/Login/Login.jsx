@@ -9,9 +9,14 @@ import css from './login.module.css';
 
 const maxLength10 = maxLengthCreator(30);
 
-const LoginForm = (props) => {
+
+
+
+// Можно использовать деструктуризаию {handleSubmit, error},
+// чтобы постоянно не писать props.handleSubmit и props.error
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 {/* <input placeholder={'Login'} /> */}
                 {/* Вместо input используем Field - Это типа контейнерный компонент */}
@@ -28,9 +33,9 @@ const LoginForm = (props) => {
                 {/* <input type={'checkbox'} /> remember me */}
                 <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
             </div>
-            {props.error &&
+            {error &&
                 <div className={css.formError}>
-                    {props.error}
+                    {error}
                 </div>
             }
             <div>

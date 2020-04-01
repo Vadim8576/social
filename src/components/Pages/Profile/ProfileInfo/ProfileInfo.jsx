@@ -6,7 +6,6 @@ import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
-    // debugger;
     if(!props.profile) {
         return <Preloader />
     } 
@@ -22,11 +21,8 @@ const ProfileInfo = (props) => {
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
 
-                {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus} /> */}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-             
-                {/* {props.profile.aboutMe && <div className={css.status}><span>Статус: {props.profile.aboutMe}</span></div>} */}
-              
+                           
                 Мои контакты:
                 {props.profile.contacts && 
                     Object.keys(props.profile.contacts)

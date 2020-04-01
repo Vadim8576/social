@@ -11,16 +11,22 @@ import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetchin
 
 class UsersContainer extends React.Component {
     //////////////////////////// методы жизненного цикла
+    // Компонент монтируется
     componentDidMount() {
+
+        let {currentPage, pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
         
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
-        
+    }
+    // Компонент размонтируется
+    componentWillUnmount() {
+        this.props.setCurrentPage(1);
     }
 /////////////////////////////////////////////////////////
     
     loadMoreUsers  = (page) => {
-
-        this.props.loadMoreUsers(page, this.props.pageSize);
+        let {pageSize} = this.props;
+        this.props.loadMoreUsers(page, pageSize);
        
     } 
 

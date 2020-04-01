@@ -4,13 +4,17 @@ import { NavLink } from 'react-router-dom';
 import Preloader from './../../common/preloader/preloader';
 
 
-let Users = (props) => {
+
+
+
+// Димыч делал Paginator  в 90ом уроке (redux-ducks). Примерно на 45 минуте.
+let Users = ({users, totalUsersCount, currentPage, pageSize, ...props}) => {
 
     return <div className={css.usersWrapper}>
                 <div className={css.totalUsersCount}>
-                    Пользователей: {props.users.length} ({props.totalUsersCount})
+                    Пользователей: {users.length} ({totalUsersCount})
                  </div>
-                {props.users.map(u =>
+                {users.map(u =>
                 <div key={u.id} className={css.usersItem}>
                     <div className={css.users}>
                         <NavLink to={'/profile/'+u.id}>
@@ -26,11 +30,11 @@ let Users = (props) => {
                     </div>
                 </div>)}  
                 {
-                    (props.currentPage * props.pageSize) < props.totalUsersCount && (
+                    (currentPage * pageSize) < totalUsersCount && (
                         <div className={css.loadMoreBtnWrapper}>             
                             {props.isFetching ? <Preloader /> :
                             <button onClick={(e) => {
-                                let nextPage = props.currentPage+1;
+                                let nextPage = currentPage+1;
                                 props.loadMoreUsers(nextPage);
                                 }}>Еще...</button>}
                         </div>)
