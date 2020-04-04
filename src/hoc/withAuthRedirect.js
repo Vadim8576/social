@@ -11,6 +11,8 @@ let mapStateToPropsRedirect = (state) => {
 
 
 // это HOC - компонент высшего порядка (Hight Order Component)
+// HOC - функция, которая принимет компонент и возвращает компонент
+
 
 export const withAuthRedirect = (Component) => {
 
