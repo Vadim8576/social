@@ -24,9 +24,10 @@ class UsersContainer extends React.Component {
     }
 /////////////////////////////////////////////////////////
     
-    loadMoreUsers  = (page) => {
+    loadMoreUsers  = () => {
         let {pageSize} = this.props;
-        this.props.loadMoreUsers(page, pageSize);
+        let nextPage = this.props.currentPage+1;
+        this.props.loadMoreUsers(nextPage, pageSize);
        
     } 
 

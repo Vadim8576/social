@@ -10,6 +10,19 @@ import Preloader from './../../common/preloader/preloader';
 // Димыч делал Paginator  в 90ом уроке (redux-ducks). Примерно на 45 минуте.
 let Users = ({users, totalUsersCount, currentPage, pageSize, ...props}) => {
 
+
+    // window.addEventListener('scroll', (e) => {
+    //     console.log('scroll', window.scrollY, window.scrollTop);
+    // });
+    // console.log(window);
+
+
+    // window.addEventListener('resize', () => {
+    //     console.log('resize', window.innerHeight, window.outerHeight);
+    // });
+
+
+
     return <div className={css.usersWrapper}>
                 <div className={css.totalUsersCount}>
                     Пользователей: {users.length} ({totalUsersCount})
@@ -34,8 +47,7 @@ let Users = ({users, totalUsersCount, currentPage, pageSize, ...props}) => {
                         <div className={css.loadMoreBtnWrapper}>             
                             {props.isFetching ? <Preloader /> :
                             <button onClick={(e) => {
-                                let nextPage = currentPage+1;
-                                props.loadMoreUsers(nextPage);
+                                props.loadMoreUsers();
                                 }}>Еще...</button>}
                         </div>)
                 }
