@@ -1,10 +1,8 @@
 import React from 'react';
 import HeaderContainer from './components/Header/headerContainer';
 import Navigation from './components/Navigation/navigation';
-import UsersContainer from './components/Pages/Users/usersContainer';
 import News from './components/Pages/News/News';
 import Fotos from './components/Pages/Fotos/Fotos';
-import LoginPage from './components/Login/Login';
 import './App.css';
 import { initializeApp } from '../src/components/Redux/appReducer';
 import { compose } from 'redux';
@@ -21,7 +19,11 @@ const DialogsContainer = React.lazy(() => import('./components/Pages/Dialogs/dia
 // import ProfileContainer from './components/Pages/Profile/profileContainer';
 const ProfileContainer = React.lazy(() => import('./components/Pages/Profile/profileContainer'));
 
+// import UsersContainer from './components/Pages/Users/usersContainer';
+const UsersContainer = React.lazy(() => import('./components/Pages/Users/usersContainer'));
 
+// import LoginPage from './components/Login/Login';
+const LoginPage = React.lazy(() => import('./components/Login/Login'));
 
 
 
