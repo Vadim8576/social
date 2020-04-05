@@ -8,8 +8,6 @@ import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     
-    let isOwner=true;
-    
     // локальный state
     let [editMode, setEditMode] = useState(false);
     // let [status, setStatus] = useState(props.status);
@@ -27,24 +25,34 @@ const ProfileInfo = (props) => {
         props.saveProfile(formData).then( () => setEditMode(false) );
     };
 
+
+    const onPhotoSelected = (event) => {
+        if(event.target.files.length) {
+            props.savePhoto(event.target.files[0]);
+        }
+    }
+
     return (
         <div className={css.profileWrapper}> 
             <div className={css.profilePhotoWrapper}>
                 <div className={css.profilePhoto}>
-                 {props.profile.photos &&<img src={props.profile.photos.small || UserNoFoto} alt="profile-photo"/>}
+                 {props.profile.photos && <img src={props.profile.photos.small || UserNoFoto} alt="profile-photo"/>}
                 </div>
             </div>
 
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
 
-               
+                <div>
+                    {props.isOwner && <input type='file' onChange={onPhotoSelected} />}
+                </div>
+                <p></p>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-
+                <p></p>
                 {editMode
                     // initialValues={props.profile} - инициализируем текст в форме из props.profile
                     && <ProfileDataReduxForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
-                    || <ProfileData profile={props.profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>
+                    || <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => setEditMode(true)}/>
                 }
                
             </div>  

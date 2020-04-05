@@ -33,7 +33,7 @@
 }
 
 .profilePhoto {
-    width: 150px;
+    max-width: 210px;
     margin: 0 auto;
  }
 

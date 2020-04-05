@@ -78,8 +78,25 @@ export const profileAPI = {
             .then(response => response.data)
     },
 
+    savePhoto(file) {
+
+        // для отправки фото нужны дополнительные "настройки"
+        // почитать о FormData и multipart/form-data
+       
+        const formData = new FormData();
+        formData.append('image', file);
+
+        return instanse
+            .put(`profile/photo`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => response.data)
+    },
+
     saveProfile(profile) {
-        // у PUT и POST запросов есть второй параметр
+
         return instanse
             .put(`profile`, profile)
             .then(response => response.data)

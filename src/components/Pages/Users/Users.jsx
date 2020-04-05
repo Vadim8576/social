@@ -2,7 +2,7 @@ import React from 'react';
 import css from './users.module.css';
 import { NavLink } from 'react-router-dom';
 import Preloader from './../../common/preloader/preloader';
-
+import UserNoFoto from '../../img/UserPhoto.jpg';
 
 
 
@@ -21,7 +21,7 @@ let Users = ({users, totalUsersCount, currentPage, pageSize, ...props}) => {
     //     console.log('resize', window.innerHeight, window.outerHeight);
     // });
 
-
+// debugger;
 
     return <div className={css.usersWrapper}>
                 <div className={css.totalUsersCount}>
@@ -31,7 +31,7 @@ let Users = ({users, totalUsersCount, currentPage, pageSize, ...props}) => {
                 <div key={u.id} className={css.usersItem}>
                     <div className={css.users}>
                         <NavLink to={'/profile/'+u.id}>
-                            <img src={u.photos.small != null ? u.photos.small: 'images/UserPhoto.jpg'} className={css.avatar} alt='' />
+                            {<img src={u.photos.small ? u.photos.small : UserNoFoto} className={css.avatar} alt='avatar' />}
                         </NavLink>        
                         <span>{u.name}</span>
                     </div>
