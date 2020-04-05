@@ -9,6 +9,7 @@ const Header = (props) => {
     // if(!props.profile) {
     //     return <Preloader />
     // } 
+
     return (
         <div className={css.header}>
             <div className={css.headerLogo}>

@@ -1,5 +1,6 @@
 import { usersAPI } from './../../api/api';
 import { profileAPI } from './../../api/api';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -59,6 +60,7 @@ export const getUserProfile = (userId) => async (dispatch) => {
     let response = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(response));
 
+    
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {
@@ -75,6 +77,19 @@ export const updateStatus = (status) => async (dispatch) => {
         dispatch(setStatus(status)); // если ошибок нет, диспатчим setStatus
     }     
 
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId
+    let response = await profileAPI.saveProfile(profile);
+    // debugger;
+    if(response.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    } else {
+        dispatch(stopSubmit('profileFormData', {_error: response.messages[0]}));
+        //вернуть промис с ошибкой
+        return Promise.reject(response.messages[0]);
+    }   
 }
 
 export default profileReducer;

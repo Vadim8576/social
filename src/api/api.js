@@ -76,6 +76,13 @@ export const profileAPI = {
         return instanse
             .put(`profile/status`, { status })
             .then(response => response.data)
+    },
+
+    saveProfile(profile) {
+        // у PUT и POST запросов есть второй параметр
+        return instanse
+            .put(`profile`, profile)
+            .then(response => response.data)
     }
 }
 
