@@ -8,7 +8,7 @@ import { initializeApp } from '../src/components/Redux/appReducer';
 import { compose } from 'redux';
 import Preloader from './components/common/preloader/preloader';
 import store from './components/Redux/reduxStore'
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 import { withSuspense } from './hoc/withSuspense';
 
@@ -46,23 +46,40 @@ class App extends React.Component {
             <Navigation />
   
             <div className='content_wrapper'>
-              {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
-              <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
-  
-              {/* благодаря withRouter появились новые параменты:
-              location и match (см. console)
-              получаем парамерт match.params.userId */}
-              {/* console.log(this.props); */}
-  
-              {/* вопросительный знак означает, что параметр не обязителен */}
-              <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
-  
-              <Route path='/users' render={withSuspense(UsersContainer)} />
-  
-              <Route path='/login' render={withSuspense(LoginPage)} />
-  
-              <Route path='/news' component={News} />
-              <Route path='/foto' component={Fotos} />    
+              <Switch>
+                {/* exact означает, что URL должен совпадать точь-в-точь */}
+                <Route exact path='/' render={() => <Redirect to={'/profile'} />} />
+
+                {/* Route следит за адресной строкой. Когда адрес равен '/dialogs', рендерит тег <Dialogs /> */}
+                <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
+    
+                {/* благодаря withRouter появились новые параменты:
+                location и match (см. console)
+                получаем парамерт match.params.userId */}
+                {/* console.log(this.props); */}
+    
+                {/* вопросительный знак означает, что параметр не обязителен */}
+                <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
+    
+                <Route path='/users' render={withSuspense(UsersContainer)} />
+    
+                <Route path='/login' render={withSuspense(LoginPage)} />
+
+                
+
+                {/* exact означает, что URL должен совпадать точь-в-точь */}
+                {/* <Route exact path='/login' render={withSuspense(LoginPage)} /> */}
+                {/* Если обернуть все Route <Switch></Switch> (импорт),*/}
+                {/* он какбы пробегается по ним и нахоит, который удовлетворяет потребностям,
+                и дальше не идет, тем самым, если URL будут похожи, до второй будет проигнорен. */}
+
+
+                <Route path='/news' component={News} />
+                <Route path='/foto' component={Fotos} />  
+
+                {/* Если Switch не найдет нужной страницы */}
+                <Route path='*' render={() => <div>404 NOT FOUND</div>} />
+              </Switch>  
             </div>  
           </div>    
       </div>   
@@ -81,6 +98,10 @@ let AppContainer = compose(
 );
 
 
+
+// <Provider store={store}> создает глобальный контекст,
+// обернутые им компоненты, могут использовать store.
+// в глобальный контекст можно добавлять, например, Тему, язык сайта
 const SamuraiJsApp = (props) => {
   return <BrowserRouter>   
             <Provider store={store}>

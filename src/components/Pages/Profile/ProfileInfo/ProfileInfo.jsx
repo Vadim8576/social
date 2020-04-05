@@ -38,14 +38,14 @@ const ProfileInfo = (props) => {
                 <div className={css.profilePhoto}>
                  {props.profile.photos && <img src={props.profile.photos.small || UserNoFoto} alt="profile-photo"/>}
                 </div>
+                <p></p>
+                <div>
+                    {props.isOwner && <input type='file' onChange={onPhotoSelected} />}
+                </div>
             </div>
 
             <div className={css.profileInfo}>
                 <div className={css.fullName}><h2>{props.profile.fullName}</h2></div>    
-
-                <div>
-                    {props.isOwner && <input type='file' onChange={onPhotoSelected} />}
-                </div>
                 <p></p>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
                 <p></p>
