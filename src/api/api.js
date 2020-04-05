@@ -112,14 +112,25 @@ export const authAPI = {
                 .get(`auth/me`)
                 .then(response => response.data)        
     },
-    login(email, password, rememberMe = false) {
+    login(email, password, rememberMe = false, captcha = null) {
         return instanse
-                .post(`auth/login`, { email, password, rememberMe })
+                .post(`auth/login`, { email, password, rememberMe, captcha })
                 .then(response => response.data)        
     },
     logout() {
         return instanse
                 .delete(`auth/login`)
+                .then(response => response.data)        
+    }
+}
+
+
+export const securityAPI = {
+    // Запрос на аудентификацию
+   
+    getCaptchaUrl() {
+        return instanse
+                .get(`security/get-captcha-url`)
                 .then(response => response.data)        
     }
 }

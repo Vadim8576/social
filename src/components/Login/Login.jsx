@@ -14,25 +14,26 @@ const maxLength10 = maxLengthCreator(30);
 
 // Можно использовать деструктуризаию {handleSubmit, error},
 // чтобы постоянно не писать props.handleSubmit и props.error
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
+    // debugger;
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                {/* <input placeholder={'Login'} /> */}
-                {/* Вместо input используем Field - Это типа контейнерный компонент */}
                 <Field placeholder={'email'} name={'email'} component={Input}
                     validate={[requiredField, maxLength10]} />
-                
             </div>
             <div>
-                {/* <input placeholder={'Password'} /> */}
                 <Field placeholder={'Password'} name={'Password'} type={'password'} component={Input}
                     validate={[requiredField, maxLength10]} />
             </div>
             <div>
-                {/* <input type={'checkbox'} /> remember me */}
                 <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
             </div>
+
+            {captchaUrl && <img src={captchaUrl} alt='captcha' />}
+            {captchaUrl && <Field placeholder={'Ввседите символы с картинки'} name={'captcha'} validate={[requiredField]} component={Input} />}
+
             {error &&
                 <div className={css.formError}>
                     {error}
@@ -56,7 +57,7 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         console.log(formData);
         
-        props.login(formData.email, formData.Password, formData.rememberMe);
+        props.login(formData.email, formData.Password, formData.rememberMe, formData.captcha);
     }
      
     if(props.isAuth) {
@@ -66,7 +67,7 @@ const Login = (props) => {
     return (
         <div className={'login'}>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
         </div>
     )
 }
@@ -74,7 +75,8 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => (
     {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
     
 )
