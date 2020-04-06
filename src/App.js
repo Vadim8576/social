@@ -28,10 +28,26 @@ const LoginPage = React.lazy(() => import('./components/Login/Login'));
 
 
 class App extends React.Component {
+
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    alert('Some error occured');
+    // console.error(promiseRejectionEvent);
+  }
+
   componentDidMount() {
 
     this.props.initializeApp();
+
+    // подписываемся на событие (ошибки Promise),
+    // когда компонент создается
+    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     
+  }
+
+  componentWillUnmount() {
+
+    // отписываемся от события, когда компонент умирает
+    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
   }
 
   render() {

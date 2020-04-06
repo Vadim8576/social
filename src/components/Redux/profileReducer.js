@@ -79,11 +79,17 @@ export const getUserStatus = (userId) => async (dispatch) => {
 }
 
 export const updateStatus = (status) => async (dispatch) => {
-
-    let response = await profileAPI.updateStatus(status);
-    if(response.resultCode === 0) {
-        dispatch(setStatus(status)); // если ошибок нет, диспатчим setStatus
-    }     
+    // try и catch используется при async-await
+    // пытаемся выполнить код в try, если выдаст ошибку - catch
+    try {
+        let response = await profileAPI.updateStatus(status);
+        if(response.resultCode === 0) {
+            dispatch(setStatus(status)); // если ошибок нет, диспатчим setStatus
+        }     
+    } catch(error) {
+        console.log(error);
+    }
+    
 
 }
 

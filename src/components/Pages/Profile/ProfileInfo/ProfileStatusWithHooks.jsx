@@ -17,7 +17,6 @@ const ProfileStatusWithHooks = (props) => {
     // это hook
     useEffect( () => {
         setStatus(props.status);
-
     }, [props.status] ); // в [] указываются зависимости, если их нет, useEffect вызовется один раз
     // если [] не указывать, useEffect будет вызываться при каждой отрисовке
     
