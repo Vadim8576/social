@@ -11,7 +11,10 @@ import {Provider} from 'react-redux';
 import SamuraiJsApp from './App';
 
 
-// Компоненты обернутые <BrowserRouter>, могут использовать Контекст, созданный им.
+// Компоненты обернутые <Provider>, с переданным в его store
+// могут использовать Контекст, созданный им (могут использовать store).
+// <Provider> добавляет store в контекст, который может использовать
+// любой компонент (обернутый)
     // ReactDOM.render(
     //     <BrowserRouter>   
     //         <Provider store={store}>
